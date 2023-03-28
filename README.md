@@ -1,38 +1,98 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Administrative web app to conect with MongoDB/ Realm BackEnd Server
 
-## Getting Started
+## Refactoring
 
-First, run the development server:
+## Separating UI Components
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-```
+- [] Create Design System with UI Components  [Figma Design System](https://www.figma.com/file/j32l029L2OzdItUQIE3fbh/Admin-Manager-Colors?t=3arr77aHD6ZsSVj4-1)
+- [] Create atoms
+- [] Create melocules
+- [] Create organims
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Clean Architecture
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- [] Model / [Prisma](https://prisma.io)
+- [] Components
+- [] Adapters / [Prisma](https://prisma.io)
+- [] External services
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+## Build basic
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+- [] Promoting page.
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+## Build basic layout
 
-## Learn More
+- [] UI basic laoyut design. [Figma Design System](https://www.figma.com/file/j32l029L2OzdItUQIE3fbh/Admin-Manager-Colors?t=3arr77aHD6ZsSVj4-1)
+- [] UX basic laoyut design. [Figma Design System](https://www.figma.com/file/j32l029L2OzdItUQIE3fbh/Admin-Manager-Colors?t=3arr77aHD6ZsSVj4-1)
 
-To learn more about Next.js, take a look at the following resources:
+## Basic Configuration Home Page for Owners and Members
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- [] Master of Companies and composition Page
+- [] Membership assignment by company
+- [] Definition of user roles by company
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+## Design function of the structure of the application
 
-## Deploy on Vercel
+- [] General options menus
+- [] Sub Menu of specific options
+- [] Design of the structure of each specific module
+- [] List Design (Infinite list layout)
+- [] General screen layout
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Build business logic
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+- [] Prisma schemas.   [Prisma](https://prisma.io)
+- [] MongoDB provider. [MongoDB](https://mongodb.com)
+- [] register & login. [Next.js](https://nextjs.org) [NextAuth.js](https://next-auth.js.org)
+- [] companies.
+- [] user's access permissions to companies.
+- [] user's access permissions to stock & inventory modules
+
+- [] stock inventory's adjust business logic
+- [] stock inventory's transfers business logic (local & inter companies wharehouse)
+
+- [] stock inventory's business logic
+- [] stock prices business logic (multi companies)
+- [] product's business logic (grouping by companies)
+  - [] Provider's Orders.
+  - [] Provider's Purchases.
+  - [] Provider's Merchandise reception
+
+## Build authenticated pages
+
+- [] Register.
+- [] Login.
+
+    ![WebAuthn Architecture](public/next-auth-diagram.jpg)
+     <https://next-auth.js.org/>
+
+## Build Home pages
+
+- [] Promotional Landing Home page.
+
+## Build Stock pages
+
+- [] Inventory's adjust dashboard.
+- [] Inventory's transfers dashboard.
+- [] Inventory's dashboard.
+- [] Product's dashboard.
+  - [] Budget
+  - [] Provider's Orders.
+  - [] Provider's Purchases.
+  - [] Provider's Merchandise reception
+
+- [] Prices dashboard.
+
+## Build Incoming pages
+
+- [] Providers Orders
+- [] Merchandise reception
+- [] Merchandise purchase
+  - [] Purchase expenses (Import expenses & others)
+  - [] Close purchase
+
+## Build Outcoming pages
+
+- [] Customer orders confirmation
+- [] Dispatch of merchandise
+- [] Invoicing
