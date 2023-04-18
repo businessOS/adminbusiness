@@ -72,7 +72,6 @@
 - [] configure stripe subscription wizard
 ![Strype design ](public/blog-payment-api-design-diagram.svg)
 
-
 ## Build Home pages
 
 - [] Promotional Landing Home page.
