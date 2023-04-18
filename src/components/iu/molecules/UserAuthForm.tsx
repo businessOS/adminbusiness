@@ -2,15 +2,14 @@
 
 import { cn } from '@/lib/utils'
 import { signIn } from 'next-auth/react'
-import * as React from 'react'
-import { FC } from 'react'
-import { Button } from './ui/Button'
-import { toast } from './ui/toast'
+import { FC, useState } from 'react'
+import { toast } from '@/ui/atoms/toast'
+import { Button } from '@/ui/atoms/Button'
 
 interface UserAuthFormProps extends React.HTMLAttributes<HTMLDivElement> { }
 
 const UserAuthForm: FC<UserAuthFormProps> = ({ className, ...props }) => {
-    const [isLoading, setIsLoading] = React.useState<boolean>(false)
+    const [isLoading, setIsLoading] = useState<boolean>(false)
 
     const loginWithGoogle = async () => {
         setIsLoading(true)
@@ -29,11 +28,11 @@ const UserAuthForm: FC<UserAuthFormProps> = ({ className, ...props }) => {
     }
 
     return (
-        <div className={cn('flex justify-center', className)} {...props}>
+        <div className={cn('flex justify-center mx-2', className)} {...props}>
             <Button
                 isLoading={isLoading}
                 type='button'
-                className='w-full max-w-sm bg-slate-200 text-slate-800 hover:text-slate-100'
+                className='w-full max-w-sm mx-5 bg-slate-200 text-slate-800 hover:text-slate-100'
                 onClick={loginWithGoogle}
                 disabled={isLoading}>
                 {isLoading ? null : (

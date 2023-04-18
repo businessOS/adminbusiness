@@ -13,3 +13,28 @@
 body {
   margin: 0;
 }
+
+/** use this class to wrap main container of the app Module: Wrapper */
+.min-h-device {
+  min-height: 97svh;
+  min-width: 97svw;
+}
+
+.fonth1 {
+  font-size: 16cpqi;
+  font-weight: 800;
+}
+
+.fonth2 {
+  font-size: 14cpqi;
+  font-weight: 700;
+}
+
+.fonth3 {
+  font-size: 12cpqi;
+  font-weight: 600;
+}
+
+.scrollbar-transparent::-webkit-scrollbar {
+  @apply w-0 h-0;
+}

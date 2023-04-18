@@ -1,0 +1,850 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+type ClientOrdersCustomer {
+  id       String                       @map("_id") @db.ObjectId
+  delivery ClientOrdersCustomerDelivery
+  name     String
+  picture  String
+}
+
+type ClientOrdersCustomerDelivery {
+  city     String
+  country  String
+  dir      String
+  number   String
+  postCode String
+  state    String
+  street   String
+}
+
+type ClientOrdersDetails {
+  category     String
+  code         String
+  codeBar      String
+  color        String
+  conditions   String
+  description  String
+  expDate      DateTime                       @db.Date
+  line         String
+  model        String
+  notes        String
+  observations String
+  pictures     String[]
+  productId    String                         @db.ObjectId
+  quantity     Float
+  ref          String
+  salesPrices  ClientOrdersDetailsSalesPrices
+  subLine      String
+  subTotal     Float
+  taxes        ClientOrdersDetailsTaxes
+  total        Float
+  unitSales    ClientOrdersDetailsUnitSales
+}
+
+type ClientOrdersDetailsSalesPrices {
+  price    Float
+  tagPrice String
+}
+
+type ClientOrdersDetailsTaxes {
+  iva    Float
+  luxery Float
+}
+
+type ClientOrdersDetailsUnitSales {
+  name     String
+  quantity Float
+}
+
+type ClientOrdersTaxes {
+  iva    Float
+  luxury Float
+}
+
+type Address {
+  city     String
+  country  String
+  dir      String
+  number   String
+  postCode String
+  state    String
+  street   String
+}
+
+type Phone {
+  main   Int
+  office String
+  mobile String
+  fax    String
+}
+
+type CustomersBranchs {
+  division String
+  name     String
+}
+
+type CustomersContact {
+  appointmentDays  String
+  appointmentHours String
+  email            String
+  ext              String
+  mobilePhone      String
+  name             String
+  officePhone      String
+  position_        String @map("position ")
+  zoom             String
+}
+
+type CustomersDeliveries {
+  city     String
+  coutry   String
+  dir      String
+  number   String
+  postCode String
+  state    String
+  street   String
+}
+
+type CustomersDuty {
+  Country String
+}
+
+type CustomersLoc {
+  coordinate Float[]
+  type       String
+}
+
+type CustomersSellers {
+  contact        CustomersSellersContact
+  country        String
+  postCode       String
+  relatedCompany String                  @db.ObjectId
+  zone           String
+}
+
+type CustomersSellersContact {
+  address         Address
+  appoinmentHours String
+  appointmentDays String
+  email           String
+  ext             String
+  facebook        String
+  instagram       String
+  mobilePhone     String
+  name            String
+  officePhone     String
+  position        String
+  webpage         String
+  zoom            String
+}
+
+type ProductsAverageCost {
+  unitPurchase Float
+  unitSales    Int
+}
+
+type ProductsCompanies {
+  id String
+}
+
+type ProductsCompound {
+  id            String
+  salesQuantity Int
+}
+
+type ProductsCrossSell {
+  id String
+}
+
+type ProductsDocumentation {
+  value String
+}
+
+type ProductsDuty {
+  agreement   String
+  description String
+  name        String
+  percent     Float
+}
+
+type ProductsLastCost {
+  unitPurchase Float
+  unitSales    Int
+}
+
+type ProductsMedia {
+  url String
+}
+
+type ProductsNotes {
+  value String
+}
+
+type ProductsPriceOfSales {
+  price01 Int
+  price02 Int
+  price03 Int
+  price04 Int
+}
+
+type ProductsRalated {
+  id String
+}
+
+type ProductsSellers {
+  email  String
+  name   String
+  quote  Int
+  userId String?
+}
+
+type ProductsSocialMedia {
+  /// Multiple data types found: Array(ProductsSocialMediaFacebook): 50%, Array(Unknown): 50% out of 2 sampled entries
+  facebook  Json
+  /// Multiple data types found: Array(ProductsSocialMediaInstagram): 50%, Array(Unknown): 50% out of 2 sampled entries
+  instagram Json
+}
+
+type ProductsSocialMediaFacebook {
+  url String
+}
+
+type ProductsSocialMediaInstagram {
+  url String
+}
+
+type ProductsStream {
+  url String
+}
+
+type ProductsSuppliers {
+  id                String @map("_id")
+  facebook          String
+  instagram         String
+  lastPrice         Int
+  name              String
+  oganization       String
+  ownerId           String
+  picture           String
+  replenishmentDays Int
+  webpage           String
+}
+
+type ProductsTaxPurchase {
+  mount Float
+  name  String
+}
+
+type ProductsTaxSales {
+  mount Float
+  name  String
+}
+
+type ProductsUnitPurchase {
+  name     String
+  quantity Int
+}
+
+type ProductsUnitSale {
+  name     String
+  quantity Int
+}
+
+type ProductsUpSells {
+  id String
+}
+
+type ProductsWarehouses {
+  companyId        String
+  /// Multiple data types found: Float: 33.3%, Int: 66.7% out of 6 sampled entries
+  purchaseQuantity Json
+  salesQuantity    Int
+}
+
+type ProposalDetail {
+  ApprovedBy    String
+  Condition     String
+  Price         Float
+  Qty           Float
+  partition     String   @map("_partition")
+  code          String
+  codeBar       String
+  createAt      DateTime @db.Date
+  description   String
+  dispatchedQty BigInt
+  dispatchedRow BigInt
+  ownerGroupId  String
+  productId     String   @db.ObjectId
+  row           BigInt
+  updateAt      String
+  validFor      Int
+}
+
+type ProposalSupplier {
+  id                String @map("_id") @db.ObjectId
+  facebook          String
+  instagram         String
+  name              String
+  oganization       String
+  ownerId           String
+  picture           String
+  replenishmentDays Int
+  webpage           String
+}
+
+type SupplierBranchs {
+  division String
+  name     String
+}
+
+type SupplierContact {
+  appointmentDays  String
+  appointmentHours String
+  email            String
+  ext              String
+  mobilePhone      String
+  name             String
+  officePhone      String
+  position_        String @map("position ")
+  zoom             String
+}
+
+type SupplierDuty {
+  Country String
+  mount   Float
+}
+
+type SupplierLoc {
+  coordinate Float[]
+  type       String
+}
+
+type SupplierOrdersDetails {
+  approvedBy   String
+  category     String
+  code         String
+  codeBar      String
+  color        String
+  conditions   String
+  description  String
+  expDate      DateTime                       @db.Date
+  isAprovved   Boolean
+  line         String
+  model        String
+  notes        String
+  observations String
+  pictures     String[]
+  price        SupplierOrdersDetailsPrice
+  productId    String                         @db.ObjectId
+  quantity     Float
+  receivedQty  Float
+  receptionId  String
+  ref          String
+  subLine      String
+  subTotal     Float
+  taxes        SupplierOrdersDetailsTaxes[]
+  total        Float
+  unitSales    SupplierOrdersDetailsUnitSales
+}
+
+type SupplierOrdersDetailsPrice {
+  price    Float
+  tagPrice String
+}
+
+type SupplierOrdersDetailsTaxes {
+  mount Float
+  name  String
+}
+
+type SupplierOrdersDetailsUnitSales {
+  name     String
+  quantity Float
+}
+
+type SupplierOrdersSupplier {
+  id                String @map("_id") @db.ObjectId
+  facebook          String
+  instagram         String
+  name              String
+  oganization       String
+  ownerId           String
+  picture           String
+  replenishmentDays Int
+  webpage           String
+}
+
+type SupplierOrdersTaxes {
+  iva    Float
+  luxury Float
+}
+
+type SupplierReceptionsCustomer {
+  id       String                             @map("_id") @db.ObjectId
+  delivery SupplierReceptionsCustomerDelivery
+  name     String
+  picture  String
+}
+
+type SupplierReceptionsCustomerDelivery {
+  city     String
+  country  String
+  dir      String
+  number   String
+  postCode String
+  state    String
+  street   String
+}
+
+type SupplierReceptionsDetails {
+  category     String
+  code         String
+  codeBar      String
+  color        String
+  conditions   String
+  description  String
+  expDate      DateTime                             @db.Date
+  line         String
+  model        String
+  notes        String
+  observations String
+  pictures     String[]
+  productId    String                               @db.ObjectId
+  quantity     Float
+  ref          String
+  salesPrices  SupplierReceptionsDetailsSalesPrices
+  subLine      String
+  subTotal     Float
+  taxes        SupplierReceptionsDetailsTaxes
+  total        Float
+  unitSales    SupplierReceptionsDetailsUnitSales
+}
+
+type SupplierReceptionsDetailsSalesPrices {
+  price    Float
+  tagPrice String
+}
+
+type SupplierReceptionsDetailsTaxes {
+  iva    Float
+  luxery Float
+}
+
+type SupplierReceptionsDetailsUnitSales {
+  name     String
+  quantity Float
+}
+
+type SupplierReceptionsTaxes {
+  iva    Float
+  luxury Float
+}
+
+type SupplierSellers {
+  appoinmentDays String
+  country        String
+  email          String
+  name           String
+  phone          String
+  position       String
+  relatedCompany String @db.ObjectId
+  zone           String
+}
+
+type WarehousesCompany {
+  NIF         String
+  address     WarehousesCompanyAddress
+  description String
+  id          String                   @db.ObjectId
+  name        String
+  picture     String
+}
+
+type WarehousesCompanyAddress {
+  city     String
+  country  String @db.ObjectId
+  dir      String
+  number   String
+  postCode String
+  state    String
+  street   String
+}
+
+type WarehousesLocation {
+  coordinate Float[]
+  type       String
+}
+
+type WarehousesProduct {
+  id               String                        @map("_id") @db.ObjectId
+  category         String
+  code             String
+  codeBar          String
+  color            String
+  description      String
+  line             String
+  model            String
+  priceOfSales     WarehousesProductPriceOfSales
+  purchaseQuantity Float
+  ref              String
+  salesQuantity    Float
+  subLine          String
+}
+
+type WarehousesProductPriceOfSales {
+  price01 Float
+  price02 Float
+  price03 Float
+  price04 Float
+}
+
+model clientOrders {
+  id           String                @id @default(auto()) @map("_id") @db.ObjectId
+  companyId    String                @db.ObjectId
+  conditions   String
+  countryId    String                @db.ObjectId
+  createAt     DateTime              @db.Date
+  customer     ClientOrdersCustomer
+  details      ClientOrdersDetails[]
+  notes        String
+  observations String
+  ownerGroupId String
+  subTotal     Float
+  taxes        ClientOrdersTaxes
+  total        Float
+  updateAt     DateTime              @db.Date
+}
+
+model customers {
+  id                String                @id @default(auto()) @map("_id") @db.ObjectId
+  address           Address
+  admin             Boolean
+  branchs           CustomersBranchs[]
+  contact           CustomersContact
+  creatAt           DateTime              @db.Date
+  deliveries        CustomersDeliveries[]
+  duty              CustomersDuty[]
+  facebook          String
+  instagram         String
+  loc               CustomersLoc
+  name              String
+  oganization       String
+  ownerGroupId      String
+  ownerId           String                @db.ObjectId
+  picture           String
+  relatedCustomers  String[]
+  replenishmentDays Int
+  sellers           CustomersSellers[]
+  sellersIds        String[]
+  updateAt          DateTime              @db.Date
+  version           Float
+  webpage           String
+}
+
+model products {
+  id                String                  @id @default(auto()) @map("_id") @db.ObjectId
+  partition         String                  @map("_partition")
+  active            Boolean
+  averageCost       ProductsAverageCost
+  catalog           String
+  category          String
+  code              String
+  codeBar           String
+  color             String
+  companies         ProductsCompanies[]
+  /// Multiple data types found: Array(ProductsCompound): 50%, Array(Unknown): 50% out of 2 sampled entries
+  compound          Json
+  createAt          String
+  crossSell         ProductsCrossSell[]
+  description       String
+  documentation     ProductsDocumentation[]
+  duty              ProductsDuty
+  lastCost          ProductsLastCost
+  likes             Int
+  line              String
+  media             ProductsMedia[]
+  model             String
+  notes             ProductsNotes[]
+  origin            String
+  ownerGroupId      String
+  pointOfOrder      Int
+  priceOfSales      ProductsPriceOfSales
+  productType       String
+  ralated           ProductsRalated[]
+  ref               String
+  sellers           ProductsSellers[]
+  socialMedia       ProductsSocialMedia
+  stars             Float
+  stockMax          Int
+  stockMin          Int
+  stockUnitPurchase Int
+  stockUnitSales    Int
+  stream            ProductsStream[]
+  subLine           String
+  suppliers         ProductsSuppliers[]
+  taxPurchase       ProductsTaxPurchase[]
+  taxSales          ProductsTaxSales[]
+  unitPurchase      ProductsUnitPurchase
+  unitSale          ProductsUnitSale
+  upSells           ProductsUpSells[]
+  updateAt          String
+  userCreate        String
+  userUpdate        String
+  version           Float
+  warehouses        ProductsWarehouses[]
+
+  @@index([partition], map: "_partition_1")
+}
+
+model proposal {
+  id           String           @id @default(auto()) @map("_id") @db.ObjectId
+  ApprovedBy   String
+  Detail       ProposalDetail[]
+  Status       String
+  partition    String           @map("_partition")
+  active       Boolean
+  condition    String
+  createAt     DateTime         @db.Date
+  ownerGroupId String
+  ownerId      String
+  supplier     ProposalSupplier
+  updateAt     String
+}
+
+model supplier {
+  id                String            @id @default(auto()) @map("_id") @db.ObjectId
+  partition         String            @map("_partition")
+  address           Address
+  branchs           SupplierBranchs[]
+  contact           SupplierContact
+  creatAt           DateTime          @db.Date
+  duty              SupplierDuty[]
+  facebook          String
+  instagram         String
+  loc               SupplierLoc
+  name              String
+  oganization       String
+  ownerGroupId      String
+  ownerId           String
+  picture           String
+  replenishmentDays Int
+  sellers           SupplierSellers[]
+  updateAt          DateTime          @db.Date
+  version           Float
+  webpage           String
+}
+
+model supplierOrders {
+  id           String                  @id @default(auto()) @map("_id") @db.ObjectId
+  partition    String                  @map("_partition")
+  companyId    String                  @db.ObjectId
+  conditions   String
+  countryId    String                  @db.ObjectId
+  createAt     DateTime                @db.Date
+  details      SupplierOrdersDetails[]
+  isActive     Boolean
+  isAprovved   Boolean
+  isCompleate  Boolean
+  notes        String
+  observations String
+  ownerGroupId String
+  receptionId  String
+  status       String
+  subTotal     Float
+  supplier     SupplierOrdersSupplier
+  taxes        SupplierOrdersTaxes
+  total        Float
+  updateAt     DateTime                @db.Date
+}
+
+model supplierReceptions {
+  id           String                      @id @default(auto()) @map("_id") @db.ObjectId
+  companyId    String                      @db.ObjectId
+  conditions   String
+  countryId    String                      @db.ObjectId
+  createAt     DateTime                    @db.Date
+  customer     SupplierReceptionsCustomer
+  details      SupplierReceptionsDetails[]
+  notes        String
+  observations String
+  ownerGroupId String
+  subTotal     Float
+  taxes        SupplierReceptionsTaxes
+  total        Float
+  updateAt     DateTime                    @db.Date
+}
+
+model warehouses {
+  id           String             @id @default(auto()) @map("_id") @db.ObjectId
+  company      WarehousesCompany
+  description  String
+  insideLoc    String
+  location     WarehousesLocation
+  name         String
+  ownerGroupId String
+  product      WarehousesProduct
+}
+
+type point {
+  lat  Int
+  long Int
+}
+
+type loc {
+  type  String
+  coord point
+}
+
+model Companies {
+  id                String     @id @default(auto()) @map("_id") @db.ObjectId
+  partition         String     @map("_partition")
+  groupId           String
+  ownerId           String
+  NIF               String
+  picture           String
+  imageUrl          String
+  logoUrl           String
+  isActive          Boolean
+  canTransferGoods  Boolean
+  sharedProducts    Boolean
+  name              String
+  descriptions      String
+  oganization       String
+  address           Address
+  phones            Phone
+  localitation      loc
+  canWritePartition String[]
+  canReadPartition  String[]
+  Session           Session[]
+  MemberOf          MemberOf[]
+}
+
+model Account {
+  id                String  @id @default(auto()) @map("_id") @db.ObjectId
+  userId            String  @db.ObjectId
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String? @db.String
+  access_token      String? @db.String
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String? @db.String
+  session_state     String?
+  user              User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+  @@index([userId])
+}
+
+model Session {
+  id             String    @id @default(auto()) @map("_id") @db.ObjectId
+  sessionToken   String    @unique
+  userId         String    @db.ObjectId
+  expires        DateTime
+  user           User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  currentCompany Companies @relation(fields: [companyId], references: [id], onDelete: Cascade)
+  companyId      String    @db.ObjectId
+
+  @@index([userId])
+}
+
+type Subscription {
+  active  String
+  expires DateTime
+  token   String
+}
+
+type Access {
+  pathName String
+  auth     String
+}
+
+type RoleAccess {
+  roleName        String
+  app             String
+  isAdministrator Boolean
+  access          Access[]
+}
+
+model MemberOf {
+  id         String     @id @default(auto()) @map("_id") @db.ObjectId
+  userId     String     @db.ObjectId
+  companyId  String     @db.ObjectId
+  confirmed  Boolean
+  roleAccess RoleAccess
+  user       User       @relation(fields: [userId], references: [id], onDelete: Cascade)
+  company    Companies  @relation(fields: [companyId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, companyId])
+}
+
+model Perfil {
+  id                 String       @id @default(auto()) @map("_id") @db.ObjectId
+  userId             String       @db.ObjectId
+  partition          String       @unique @map("_partition")
+  username           String       @default("")
+  isSetup            Boolean      @default(false)
+  role               String       @default("none")
+  canReadPartitions  String[]
+  canWritePartitions String[]
+  address            Address
+  phones             Phone
+  description        String       @default("")
+  subscription       Subscription
+}
+
+model User {
+  id            String     @id @default(auto()) @map("_id") @db.ObjectId
+  name          String?    @default("")
+  email         String?    @unique
+  emailVerified DateTime?
+  image         String?    @map("picture")
+  apiKey        ApiKey[]
+  apiKeyId      String?
+  accounts      Account[]
+  sessions      Session[]
+  memberOf      MemberOf[]
+}
+
+model ApiKey {
+  id       String       @id @default(auto()) @map("_id") @db.ObjectId
+  key      String       @unique
+  module   String
+  enabled  Boolean      @default(true)
+  User     User         @relation(fields: [userId], references: [id])
+  userId   String       @db.ObjectId
+  requests ApiRequest[]
+
+  @@unique([userId, key, module, enabled])
+}
+
+model ApiRequest {
+  id         String   @id @default(auto()) @map("_id") @db.ObjectId
+  timestamp  DateTime @default(now())
+  method     String
+  path       String
+  status     Int
+  duration   Int
+  usedApiKey String
+  ApiKey     ApiKey   @relation(fields: [apiKeyId], references: [id])
+  apiKeyId   String   @db.ObjectId
+
+  @@index([apiKeyId, timestamp])
+}
+
+model VerificationToken {
+  identifier String   @id @default(auto()) @map("_id") @db.ObjectId
+  token      String   @unique
+  expires    DateTime
+
+  @@unique([identifier, token])
+}

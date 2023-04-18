@@ -3,31 +3,54 @@ import { ThemeToggle } from '@/ui/molecules/ThemeToggle'
 import LanguageToggle from '@/ui/molecules/LanguageToggle'
 import { cn } from '@/lib/utils'
 
-import { Inter } from 'next/font/google'
-import Aside from '@/ui/molecules/Aside'
+import Aside from '@/components/iu/molecules/Aside/Aside'
 import NavBar from '@/ui/molecules/NavBar'
+import { getServerSession } from 'next-auth'
+import { authOptions } from '@/lib/auth/auth'
 
-const inter = Inter({ subsets: ['latin'] })
+import { useUserStore } from "@/components/store/userStore"
+import UserStoreInitializer from '@/components/store/userStoreInitializer'
 
-interface MainWrapProps {
-    children: ReactNode
-}
+const Wrapper = async ({ children, lang }: { children: ReactNode, lang: string; }) => {
+    const session = await getServerSession(authOptions)
+    const showMenu = session && session?.user.isSetup
 
-const Wrapper: FC<MainWrapProps> = ({ children }) => {
+    useUserStore.setState(
+        {
+            name: session?.user.name,
+            image: session?.user.image,
+            email: session?.user.email,
+            role: session?.user.role,
+            description: session?.user.description,
+            currentCompany: session?.user.currentCompany,
+        }
+    )
+
     return (
-        <div className={cn('relative flex flex-col min-h-screen px-3 pt-1 pb-4 sm:pt-3 sm:pb-9 sm:px-5 text-light-text-main-color dark:text-dark-text-main-color', inter.className)}>
-            <div className='flex justify-end gap-4 pb-2 pr-2 align-middle basis-full'>
+        <div className={cn('relative flex flex-col min-h-device my-4 px-3 pt-1 pb-4 sm:pt-3 sm:pb-9 sm:px-5 text-light-text-main-color dark:text-dark-text-main-color')}>
+            <UserStoreInitializer
+                name={session?.user.name}
+                image={session?.user.image}
+                email={session?.user.email}
+                description=''
+            />
+            <div className='flex justify-end gap-4 pb-2 pr-2 align-middle flex-0'>
                 <ThemeToggle />
                 <LanguageToggle />
             </div>
-            <div className='flex flex-col-reverse flex-1 gap-4 p-4 overflow-hidden rounded-md shadow-2xl md:flex-row bg-light-main shadow-slate-950 dark:bg-dark-main sm:border-8 sm:rounded-xl sm:border-light-aside dark:sm:border-dark-text-secondary-color'>
-                <Aside />
-                <div className='flex-grow'>
-                    <NavBar />
-                    {children}
+            {/* the user is logged in show private menu */}
+            {showMenu &&
+                <div className={cn('flex flex-col-reverse flex-1 gap-4  overflow-hidden rounded-md shadow-2xl md:flex-row bg-light-main shadow-slate-950 dark:bg-dark-main sm:border-8 sm:rounded-xl sm:border-light-border dark:sm:border-dark-border')}>
+                    < Aside lang={lang} />
+                    <div className='flex-grow'>
+                        {showMenu && <NavBar lang={lang} />}
+                        {children}
+                    </div>
                 </div>
-            </div>
-        </div>
+            }
+            {/* is the user is not logged the children component will handle his own layout */}
+            {!showMenu && children}
+        </div >
     )
 }
 

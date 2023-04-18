@@ -22,3 +22,15 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
 Input.displayName = 'Input'
 
 export { Input }
+
+
+/**
+<div class="flex flex-col">
+            <label for="name">Name</label>
+            <input type="text" name="name" id="name" required class="peer border border-slate-400">
+
+            <p class="invisible peer-invalid:visible text-red-700 font-light">
+                Please enter your name
+            </p>
+        </div>
+*/

@@ -1,11 +1,12 @@
+'use client'
 import { FC } from 'react'
 import TitleBar from './TitleBar'
 
 interface indexProps {
-
+    lang: string
 }
 
-const NavBar: FC<indexProps> = ({ }) => {
+const NavBar: FC<indexProps> = ({ lang }) => {
     //  User Rigths
     // TODO: Build Auth setup that include user role and autorizations
     // const session = useSession()

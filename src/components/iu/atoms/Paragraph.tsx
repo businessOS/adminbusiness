@@ -4,11 +4,11 @@ import { cn } from '@/lib/utils'
 
 
 const paragraphVariants = cva(
-    'max-w-prose text-slate-700 dark:text-slate-300 mb-2 text-center',
+    'max-w-prose text-slate-700 mb-2',
     {
         variants: {
             size: {
-                default: 'text-base sm:text-lg',
+                default: 'text-base sm:text-xl',
                 sm: 'text-sm sm:text-base',
             },
         },
@@ -29,7 +29,7 @@ const Paragraph = React.forwardRef<HTMLParagraphElement, ParagraphProps>(
             <p
                 ref={ref}
                 {...props}
-                className={cn(paragraphVariants({ size, className }))}            >
+                className={cn(paragraphVariants({ size, className }), 'text-light-text-main-color dark:text-dark-text-main-color')}            >
                 {children}
             </p>
         )

@@ -1,5 +1,5 @@
 const { colors } = require("tailwindcss/colors");
-const { fontFamily } = require("tailwindcss/defaultTheme");
+const { mauve } = require("@radix-ui/colors");
 
 /** @type {import('tailwindcss').Config} */
 module.exports = {
@@ -22,10 +22,11 @@ module.exports = {
     },
     extend: {
       fontFamily: {
-        sans: ["var(--font-inter)", ...fontFamily.sans],
+        sans: ["var(--font-verdana)"],
       },
       colors: {
         ...colors,
+        ...mauve,
         "light-gold": "#f5bc51",
         "dark-gold": "#533519",
         "light-main": "#FFFFFF",
@@ -40,12 +41,44 @@ module.exports = {
         "dark-text-main-color": "#FFFFFF",
         "light-text-secondary-color": "#000000",
         "dark-text-secondary-color": "#BBBCBE",
-        "light-sucess": "#4C70FE",
-        "dark-sucess": "#4C70FE",
+        "light-sucess": "#65CBA0",
+        "dark-sucess": "#65CBA0",
         "light-error": "#E53E3E",
         "dark-error": "#FEB2B2",
+        "light-border": "#e6e6ef",
+        "dark-border": "#BBBCBE",
+      },
+      keyframes: {
+        slideUpAndFade: {
+          "0%": { opacity: 0, transform: "translateY(2px)" },
+          "100%": { opacity: 1, transform: "translateY(0)" },
+        },
+        slideRightAndFade: {
+          "0%": { opacity: 0, transform: "translateX(-2px)" },
+          "100%": { opacity: 1, transform: "translateX(0)" },
+        },
+        slideDownAndFade: {
+          "0%": { opacity: 0, transform: "translateY(-2px)" },
+          "100%": { opacity: 1, transform: "translateY(0)" },
+        },
+        slideLeftAndFade: {
+          "0%": { opacity: 0, transform: "translateX(2px)" },
+          "100%": { opacity: 1, transform: "translateX(0)" },
+        },
+      },
+      animation: {
+        slideUpAndFade: "slideUpAndFade 300ms cubic-bezier(0.16, 0, 0.13, 1)",
+        slideDownAndFade:
+          "slideDownAndFade 300ms cubic-bezier(0.16, 0, 0.13, 1)",
+        slideRightAndFade:
+          "slideRightAndFade 300ms cubic-bezier(0.16, 0, 0.13, 1)",
+        slideLeftAndFade:
+          "slideLeftAndFade 300ms cubic-bezier(0.16, 0, 0.13, 1)",
       },
     },
   },
-  plugins: [require("@tailwindcss/typography")],
+  plugins: [
+    require("@tailwindcss/typography"),
+    require("@tailwindcss/container-queries"),
+  ],
 };

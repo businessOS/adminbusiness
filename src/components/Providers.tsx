@@ -11,9 +11,9 @@ interface ProvidersProps {
 const Providers: FC<ProvidersProps> = ({ children }) => {
     return (
         <ThemeProvider attribute='class' defaultTheme='system' enableSystem>
-            {/* <SessionProvider> */}
-            {children}
-            {/* </SessionProvider> */}
+            <SessionProvider>
+                {children}
+            </SessionProvider>
         </ThemeProvider>
     )
 }

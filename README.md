@@ -11,9 +11,10 @@
 
 ## Clean Architecture
 
-- [] Model / [Prisma](https://prisma.io)
+- [x] MongoDB with Prisma [Advanced MongoDB Workshop](https://prismaio.notion.site/Advanced-MongoDB-Workshop-4a11353478b2410aa3768ca59c274507)
+- [x] Model / [Prisma](https://prisma.io)
 - [] Components
-- [] Adapters / [Prisma](https://prisma.io)
+- [x] Adapters / [Prisma](https://prisma.io)
 - [] External services
 
 ## Build basic
@@ -41,9 +42,11 @@
 
 ## Build business logic
 
-- [] Prisma schemas.   [Prisma](https://prisma.io)
-- [] MongoDB provider. [MongoDB](https://mongodb.com)
-- [] register & login. [Next.js](https://nextjs.org) [NextAuth.js](https://next-auth.js.org)
+- [x] Prisma schemas.   [Prisma](https://prisma.io)
+- [x] MongoDB provider. [MongoDB](https://mongodb.com)
+- [x] login.            [Next.js](https://nextjs.org) [NextAuth.js](https://next-auth.js.org)
+- [] configure first time setup (in progress)
+- [] configure stripe subscription
 - [] companies.
 - [] user's access permissions to companies.
 - [] user's access permissions to stock & inventory modules
@@ -58,13 +61,17 @@
   - [] Provider's Purchases.
   - [] Provider's Merchandise reception
 
-## Build authenticated pages
+## Build authenticated & first time setup (Wizard) pages
 
-- [] Register.
-- [] Login.
-
+- [x] Login.
     ![WebAuthn Architecture](public/next-auth-diagram.jpg)
      <https://next-auth.js.org/>
+- [x] basic wizard componenct
+- [] configure first time setup wizard.
+   ![Strype subscription example ](public/stripe-model.ie.png)
+- [] configure stripe subscription wizard
+![Strype design ](public/blog-payment-api-design-diagram.svg)
+
 
 ## Build Home pages
 

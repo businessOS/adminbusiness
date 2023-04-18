@@ -1,8 +1,11 @@
 'use client';
+
 import { type LucideIcon } from 'lucide-react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { FC, ReactElement } from 'react'
+
+
+import { FC } from 'react'
 import Icons from '@/ui/molecules/Icons'
 import { cn } from '@/lib/utils';
 import { VariantProps, cva } from 'class-variance-authority';
@@ -21,9 +24,9 @@ const ActiveLinkIconVariants = cva(
                     'flex items-center justify-center rounded-lg flex-0 text-dark-text-main-color dark:text-dark-text-main-color ',
             },
             size: {
-                default: 'w-4 h-4 rounded-lg ',
-                md: 'w-5 h-5 rounded-lg',
-                lg: 'w-9 h-9 rounded-lg',
+                default: 'w-4 h-4 rounded-lg text-sm font-extralight',
+                md: 'w-5 h-5 rounded-lg text-base font-light',
+                lg: 'w-9 h-9 rounded-lg text-lg',
             },
         },
         defaultVariants: {
@@ -41,7 +44,7 @@ const ActiveLinkVariants = cva(
         variants: {
             variant: {
                 default:
-                    'hover:bg-light-secondary dark:hover:bg-dark-secondary text-light-text-main-color dark:text-dark-text-main-color',
+                    'text-light-text-main-color dark:text-dark-text-main-color',
                 active:
                     'bg-light-primary text-dark-text-main-color dark:text-light-text-main-color',
             },
@@ -73,7 +76,7 @@ const ActiveLinkIcon = React.forwardRef<SVGSVGElement, IconProps>(
         }
 
         return (
-            <div className={cn(ActiveLinkVariants({ variant, size, className }), 'text-sm')}>
+            <div className={cn(ActiveLinkVariants({ variant, size, className }))}>
                 <Icon
                     className={cn(ActiveLinkIconVariants({ variant, size, className }))}
                     ref={ref}
@@ -89,12 +92,12 @@ ActiveLinkIcon.displayName = 'Button'
 
 
 const LinkVariants = cva(
-    'grid items-center justify-center grid-flow-col text-center md:grid-flow-col md:gap-4 md:justify-start md:mx-2 md:pl-2 md:pr-4 md:rounded-lg',
+    'grid items-center justify-center grid-flow-col text-center md:grid-flow-col md:gap-4 md:justify-start md:mx-2 md:pl-2 md:pr-4 md:rounded-lg text-[10px] md:text-[12px] lg:text-[13px] h-[70px] h-max-[75px] font-light md:font-normal lg:font-bold',
     {
         variants: {
             variant: {
                 default:
-                    '',
+                    'hover:bg-light-secondary dark:hover:bg-dark-secondary',
                 active:
                     'dark:md:bg-dark-primary',
             },
@@ -112,18 +115,22 @@ interface ActiveLinkProps {
 }
 
 const ActiveLink: FC<ActiveLinkProps> = ({ name, root, iconName }) => {
-    const fullpathname = usePathname()
-    const pathname = fullpathname.split('/')[1]
-    const compara = root.split('/')[1]
 
-    const isActive = pathname == compara
+    const fullpathname = usePathname() || ''
+
+    const pathname = fullpathname.split('/')[2] || ''
+    const compara = root.split('/')[2]
+
+    const isActive = pathname === compara
     const variant = isActive ? 'active' : 'default'
+
+    //console.log(`fullpathname ${fullpathname}  path: ${pathname} compara: ${compara}`)
 
     return (
         <Link
             key={`aside-btn-${name}`}
             href={root}
-            className={cn(LinkVariants({ variant }), 'h-[70px] h-max-[75px] ')}
+            className={cn(LinkVariants({ variant }))}
         >
             <ActiveLinkIcon name={iconName} variant={variant} />
             <div className="hidden text-left md:inline-block md:w-[60px] lg:w-[85px]">{name}</div>
