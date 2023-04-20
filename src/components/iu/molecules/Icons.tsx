@@ -1,5 +1,5 @@
 import { ChevronLeft, ChevronRight, Moon, Sun, Laptop, Flag, ArrowRight } from 'lucide-react'
-import { Home, Boxes, ShoppingBag, ShoppingCart, CreditCard, Settings } from 'lucide-react';
+import { Home, Boxes, ShoppingBag, ShoppingCart, CreditCard, Settings, Loader2 } from 'lucide-react';
 
 
 
@@ -16,7 +16,8 @@ export const Icons = {
     ShoppingBag,
     ShoppingCart,
     CreditCard,
-    Settings
+    Settings,
+    spinner: Loader2,
 }
 
 export default Icons

@@ -41,7 +41,7 @@ const Wrapper = async ({ children, lang }: { children: ReactNode, lang: string; 
             {/* the user is logged in show private menu */}
             {showMenu &&
                 <div className={cn('flex flex-col-reverse flex-1 gap-4  overflow-hidden rounded-md shadow-2xl md:flex-row bg-light-main shadow-slate-950 dark:bg-dark-main sm:border-8 sm:rounded-xl sm:border-light-border dark:sm:border-dark-border')}>
-                    < Aside lang={lang} />
+                    <Aside lang={lang} />
                     <div className='flex-grow'>
                         {showMenu && <NavBar lang={lang} />}
                         {children}

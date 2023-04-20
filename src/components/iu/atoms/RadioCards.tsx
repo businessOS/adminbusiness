@@ -11,7 +11,7 @@ interface RadioCardsProps {
 const RadioCards: FC<RadioCardsProps> = ({ name, buttoms, className }) => {
 
     return (
-        <div className={cn(`flex flex-wrap justify-center gap-4 md:gap-6 lg:gap-8`, className)} >
+        <div className={cn(`flex flex-wrap justify-start gap-4 md:gap-6 lg:gap-8`, className)} >
             {buttoms.map((item, index) => (
                 <div className="relative min-w-[130px] md:min-w-[190px] lg:min-w-[210px] justify " key={`radio=${item.title}-${index}`} >
                     <input type="radio" name={name} id={item.id} className="hidden peer" />

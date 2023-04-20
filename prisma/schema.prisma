@@ -803,16 +803,22 @@ model Perfil {
 }
 
 model User {
-  id            String     @id @default(auto()) @map("_id") @db.ObjectId
-  name          String?    @default("")
-  email         String?    @unique
+  id            String    @id @default(auto()) @map("_id") @db.ObjectId
+  name          String?   @default("")
+  email         String?   @unique
   emailVerified DateTime?
-  image         String?    @map("picture")
-  apiKey        ApiKey[]
-  apiKeyId      String?
-  accounts      Account[]
-  sessions      Session[]
-  memberOf      MemberOf[]
+  image         String?   @map("picture")
+
+  apiKey   ApiKey[]
+  apiKeyId String?
+  accounts Account[]
+  sessions Session[]
+  memberOf MemberOf[]
+
+  stripeCustomerId       String?   @unique @map(name: "stripe_customer_id")
+  stripeSubscriptionId   String?   @unique @map(name: "stripe_subscription_id")
+  stripePriceId          String?   @map(name: "stripe_price_id")
+  stripeCurrentPeriodEnd DateTime? @map(name: "stripe_current_period_end")
 }
 
 model ApiKey {

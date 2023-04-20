@@ -11,11 +11,11 @@ import { i18n } from '@/i18n-config'
 const verdana = localFont({
   src: [
     {
-      path: '../../components/assets/font/Verdana.ttf',
+      path: '../../components/assets/fonts/Verdana.ttf',
       weight: '400'
     },
     {
-      path: '../../components/assets/font/verdanab.ttf',
+      path: '../../components/assets/fonts/verdanab.ttf',
       weight: '700'
     }
   ],
