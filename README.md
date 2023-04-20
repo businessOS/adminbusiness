@@ -18,7 +18,7 @@ An open source application built using the new router, server components and eve
 - API Routes and Middlewares
 - Authentication using **NextAuth.js**
 - ORM using **Prisma**
-- Database on **PlanetScale**
+- Database on **MongoDB**
 - UI Components built using **Radix UI**
 - Documentation and blog using **MDX** and **Contentlayer**
 - Subscriptions using **Stripe**
