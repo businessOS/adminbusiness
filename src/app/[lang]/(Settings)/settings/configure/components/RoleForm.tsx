@@ -14,6 +14,7 @@ import { stripe } from "@/lib/stripe"
 import { getUserSubscriptionPlan } from "@/lib/subscription"
 import { redirect } from 'next/navigation'
 import { cn } from '@/lib/utils'
+import NavButtoms from './NavButtoms'
 
 interface RoleFormProps {
   aSteps: ISteps[]
@@ -42,95 +43,23 @@ const RoleForm = async ({ aSteps }: RoleFormProps) => {
         heading="Role"
         text="Manage Role, billing and your subscription plan."
       />
-      <div className="grid gap-1 md:gap-4">
-        <RadioCards className='m-0' buttoms={roleRadioButtoms} name={'role'} />
+      <div className="grid gap-4 md:gap-6 lg:gap-8 ">
+        <RadioCards
+          title='User type'
+          description='Diferents role in the companies'
+          className='m-0' buttoms={roleRadioButtoms}
+          name={'role'}
+        />
         <BillingForm
           subscriptionPlan={{
             ...subscriptionPlan,
             isCanceled,
           }}
         />
-        <Card className={cn('hidden mb-4 md:mb-0 md:block')}>
-          <Card.Header>
-            <Card.Title>Note</Card.Title>
-          </Card.Header>
-          <Card.Content className="pb-6 space-y-4 text-sm">
-            <p>
-              Admin Manager app is a demo app using a Stripe test environment.{" "}
-              <strong>
-                You can test the upgrade and won&apos;t be charged.
-              </strong>
-            </p>
-            <p>
-              You can find a list of test card numbers on the{" "}
-              <a
-                href="https://stripe.com/docs/testing#cards"
-                target="_blank"
-                rel="noreferrer"
-                className="font-medium underline underline-offset-8"
-              >
-                Stripe docs
-              </a>
-              .
-            </p>
-          </Card.Content>
-        </Card>
+        <NavButtoms />
       </div>
     </DashboardShell>
   )
 }
 
 export default RoleForm
-
-/**
- * 
- type Subscription {
-  active  String
-  expires DateTime
-  token   String
-}
-
-* 
-type Address {
-  city     String
-  country  String
-  dir      String
-  number   String
-  postCode String
-  state    String
-  street   String
-}
-
-type Phone {
-  main   Int
-  office String
-  mobile String
-  fax    String
-}
- 
- type perfil {
-  id                 String       @id @default(auto()) @map("_id") @db.ObjectId
-  userId             String       @db.ObjectId
-  partition          String       @unique @map("_partition")
-  username           String       @default("")
-  isSetup            Boolean      @default(false)
-  role               String       @default("none")
-  canReadPartitions  String[]
-  canWritePartitions String[]
-  address            Address
-  phones             Phone
-  description        String       @default("")
-  subscription       Subscription  
- }
-
-type User {
-  id            String     @id @default(auto()) @map("_id") @db.ObjectId
-  name          String?    @default("")
-  email         String?    @unique
-  emailVerified DateTime?
-  image         String?    @map("picture")
-  apiKey        ApiKey[]
-  apiKeyId      String?
-}
-
- */

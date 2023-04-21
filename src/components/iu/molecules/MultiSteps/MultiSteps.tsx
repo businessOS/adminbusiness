@@ -59,19 +59,19 @@ const MultiSteps = forwardRef<HTMLDivElement, MultiStepsProps>(
             throw new Error("Is needed almost 2 steps to create the wizard component [MultiSteps component]");
 
         return (
-            <div className="flex flex-col mt-12 ml-4  h-[95%] overflow-hidden text-gray-400 md:pr-10 md:py-6 w-h-full body-font  ">
+            <div className="flex flex-col mt-1 ml-4 md:mt-12 h-[95%] overflow-hidden text-gray-400 md:pr-10 md:py-6 w-h-full body-font  ">
                 {
                     aSteps.map((step, index) => (
                         <div className={cn("relative flex pl-2 pb-6 md:pb-12 max-h-24 md:max-h-28 overflow-hidden")} key={`step-${step.title}-${index}`} >
-                            <div className="absolute inset-0 flex items-center justify-center h-full w-14 ">
+                            <div className="absolute inset-0 top-1 flex items-center justify-center h-full w-14 ">
                                 {index < aSteps.length - 1 && <div className={cn(lineVariants({ variant: step.state }))}></div>}
                             </div>
                             <div className={cn(imageVariants({ variant: step.state }))}>
                                 {step.icon}
                             </div>
-                            <div className="pl-4 flex-0 ">
-                                <h2 className="mb-1 font-medium tracking-wider text-md md:text-base text-light-text-main-color dark:text-dark-text-main-color">{step.title}</h2>
-                                <p className="hidden text-xs leading-relaxed md:block md:text-sm font-extralight ">{step.description}</p>
+                            <div className="relative pl-4 flex-0 mt-[2px] ">
+                                <h2 className="mb-1 font-light md:font-medium tracking-wider text-sm md:text-base text-light-text-main-color dark:text-dark-text-main-color">{step.title}</h2>
+                                <p className="text-xs leading-relaxed md:text-sm font-thin md:font-extralight ">{step.description}</p>
                             </div>
                         </div>
                     ))

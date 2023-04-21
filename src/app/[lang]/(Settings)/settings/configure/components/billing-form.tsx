@@ -56,7 +56,7 @@ export function BillingForm({
                         plan.
                     </Card.Description>
                 </Card.Header>
-                <Card.Content className='text-sm md:text-base'>{subscriptionPlan.description}</Card.Content>
+                <Card.Content className='hidden md:block text-sm md:text-base'>{subscriptionPlan.description}</Card.Content>
                 <Card.Footer className="flex flex-col items-start space-y-2 md:flex-row md:justify-between md:space-x-0">
                     <button
                         type="submit"

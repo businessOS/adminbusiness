@@ -9,6 +9,7 @@ import Paragraph from "@/components/iu/atoms/Paragraph"
 import { DashboardHeader } from "@/ui/atoms/Header"
 import { DashboardShell } from "@/ui/atoms/shell"
 import RoleForm from "./components/RoleForm"
+import { Button } from "@/components/iu/atoms/Button"
 
 
 export const metadata = {
@@ -24,8 +25,8 @@ const page = ({ }) => {
                 <MultiSteps aSteps={configureASteps} />
             </aside>
 
-            <div className="flex flex-col flex-grow mx-4 my-4 border-0 md:border-2 dark:border-gray-800">
-                <div className="flex flex-col flex-grow mx-auto md:max-w-5xl lg:max-w-6xl">
+            <div className="flex flex-col flex-0 md:flex-grow md:max-h-[85vh]  mx-4 my-4 border-0 md:border-2 dark:border-gray-800 overflow-auto">
+                <div className="flex-grow max-h-[50vh] md:max-h-full mx-4 scroll-smooth scrollbar-thumb-rounded-full scrollbar-track-rounded-fulls scrollbar-thin scrollbar-thumb-light-aside dark:scrollbar-thumb-dark-aside overflow-y-auto hover:scrollbar-thumb-black">
                     {/* @ts-expect-error Server Component */}
                     <RoleForm aSteps={configureASteps} />
                 </div>
@@ -35,3 +36,58 @@ const page = ({ }) => {
 }
 
 export default page
+
+
+
+/**
+ * 
+ type Subscription {
+  active  String
+  expires DateTime
+  token   String
+}
+
+* 
+type Address {
+  city     String
+  country  String
+  dir      String
+  number   String
+  postCode String
+  state    String
+  street   String
+}
+
+type Phone {
+  main   Int
+  office String
+  mobile String
+  fax    String
+}
+ 
+ type perfil {
+  id                 String       @id @default(auto()) @map("_id") @db.ObjectId
+  userId             String       @db.ObjectId
+  partition          String       @unique @map("_partition")
+  username           String       @default("")
+  isSetup            Boolean      @default(false)
+  role               String       @default("none")
+  canReadPartitions  String[]
+  canWritePartitions String[]
+  address            Address
+  phones             Phone
+  description        String       @default("")
+  subscription       Subscription  
+ }
+
+type User {
+  id            String     @id @default(auto()) @map("_id") @db.ObjectId
+  name          String?    @default("")
+  email         String?    @unique
+  emailVerified DateTime?
+  image         String?    @map("picture")
+  apiKey        ApiKey[]
+  apiKeyId      String?
+}
+
+ */

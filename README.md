@@ -129,7 +129,6 @@ An open source application built using the new router, server components and eve
 - [] Dispatch of merchandise
 - [] Invoicing
 
-
 ## Known Issues
 
 A list of things not working right now:

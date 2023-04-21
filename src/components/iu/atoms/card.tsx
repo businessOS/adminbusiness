@@ -29,7 +29,7 @@ interface CardFooterProps extends React.HTMLAttributes<HTMLDivElement> { }
 Card.Footer = function CardFooter({ className, ...props }: CardFooterProps) {
     return (
         <div
-            className={cn("border-t border-light-main  bg-light-main  dark:bg-dark-main dark:border-dark-main px-6 py-4", className)}
+            className={cn("border-t bg-light-main  dark:bg-dark-main dark:border-gray-800 px-6 py-4", className)}
             {...props}
         />
     )

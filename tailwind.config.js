@@ -80,5 +80,9 @@ module.exports = {
   plugins: [
     require("@tailwindcss/typography"),
     require("@tailwindcss/container-queries"),
+    require("tailwind-scrollbar"),
   ],
+  variants: {
+    scrollbar: ["rounded"],
+  },
 };
