@@ -28,6 +28,10 @@ function ConfigureStoreInitializer({
         mobile,
         fax,
     },
+    pageNumber,
+    pagelength,
+    nextPage,
+    previousPage,
 }: IConfigureStore) {
     const initialized = useRef(false)
 
@@ -56,7 +60,11 @@ function ConfigureStoreInitializer({
                 office,
                 mobile,
                 fax,
-            }
+            },
+            pageNumber,
+            pagelength,
+            nextPage,
+            previousPage,
         })
         initialized.current = true
     }

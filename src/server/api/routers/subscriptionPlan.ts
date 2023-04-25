@@ -1,6 +1,7 @@
 import { z } from "zod";
 import { freePlan, proPlan } from "@/config/subscriptions"
 import { createTRPCRouter, protectedProcedure } from "../trpc";
+import { UserSubscriptionPlan } from "@/types/types"
 
 export const subscriptionRouter = createTRPCRouter({
     getUserPlan: protectedProcedure
@@ -21,18 +22,19 @@ export const subscriptionRouter = createTRPCRouter({
             }
 
             // Check if user is on a pro plan.
-            const isPro =
-                user.stripePriceId &&
-                user.stripeCurrentPeriodEnd?.getTime() || 0 + 86_400_000 > Date.now()
+            const isPro: boolean =
+                !!user.stripePriceId &&
+                (user.stripeCurrentPeriodEnd?.getTime() || 0) + 86_400_000 > Date.now()
 
             const plan = isPro ? proPlan : freePlan
 
-            return {
+            const retVal: UserSubscriptionPlan = {
                 ...plan,
                 ...user,
-                stripeCurrentPeriodEnd: user.stripeCurrentPeriodEnd?.getTime(),
+                stripeCurrentPeriodEnd: user.stripeCurrentPeriodEnd?.getTime() || 0,
                 isPro,
             }
+            return retVal as UserSubscriptionPlan
         }),
 
 });

@@ -15,9 +15,10 @@ interface RadioCardsProps {
     value?: string
     buttoms: IRadioButoms[]
     className?: string
+    onChange: (e: React.ChangeEvent<HTMLInputElement>) => void
 }
 
-const RadioCards: FC<RadioCardsProps> = ({ title, description, name, value, buttoms, className }) => {
+const RadioCards: FC<RadioCardsProps> = ({ title, description, name, value, onChange, buttoms, className }) => {
     return (
         <Card className={cn('border-0 md:border-2 mb-4 md:mb-0')}>
             {title &&
@@ -30,7 +31,7 @@ const RadioCards: FC<RadioCardsProps> = ({ title, description, name, value, butt
                 <div className={cn(`flex flex-wrap justify-start gap-4 md:gap-6 lg:gap-8 mt-4`, className)} >
                     {buttoms.map((item, index) => (
                         <div className="relative flex-grow  min-w-[130px] md:min-w-[180px] md:max-w-[240px] lg:min-w-[240px] lg:max-w-[280px] justify " key={`radio=${item.title}-${index}`} >
-                            <input tabIndex={0} type="radio" name={name} id={item.id} value={value} className="absolute opacity-0 focus:outline-1 focus:outline-light-aside focus:dark:outline-dark-aside peer" />
+                            <input tabIndex={0} type="radio" name={name} id={item.id} value={item.id} checked={item.id === value} onChange={onChange} className="absolute opacity-0 focus:outline-1 focus:outline-light-aside focus:dark:outline-dark-aside peer" />
                             <label htmlFor={item.id} className="tabular-nums tabindex-0 flex items-center h-[70px] md:h-[90px] lg:max-h-[120px] gap-4 p-4 transition shadow-md cursor-pointer dark:shadow-gray-950 rounded-md md:rounded-xl bg-opacity-750 backdrop-blur-2xl bg-light-main dark:bg-dark-main hover:bg-opacity-75 peer-checked:ring-2 peer-checked:ring-gray-400 peer-checked:dark:ring-gray-500 peer-checked:bg-light-aside peer-checked:dark:bg-dark-aside peer-focus:outline-0 peer-focus:outline-light-aside peer-focus:dark:outline-dark-aside">
 
                             </label>

@@ -1,6 +1,7 @@
 import { DashboardHeader } from '@/ui/atoms/Header'
 import { DashboardShell } from '@/ui/atoms/shell'
 import { FC } from 'react'
+import NavButtoms from './NavButtoms'
 
 interface ProfileFormProps {
 
@@ -15,6 +16,7 @@ const ProfileForm: FC<ProfileFormProps> = ({ }) => {
             />
             <div className="grid gap-4 md:gap-6 lg:gap-8 ">
 
+                <NavButtoms />
             </div>
         </DashboardShell>
 

@@ -1,43 +1,51 @@
+'use client'
 import { DashboardHeader } from '@/components/iu/atoms/Header'
 import RadioCards from '@/components/iu/atoms/RadioCards'
 import { DashboardShell } from '@/components/iu/atoms/shell'
 
 import { roleRadioButtoms } from '../assets/radiobuttoms'
 import { BillingForm } from './billing-form'
-import { Card } from '@/components/iu/atoms/card'
 
+import { useConfigureStore } from '@/components/store/configureStore'
 
-import { authOptions } from "@/lib/auth/auth"
-import { getCurrentUser } from "@/lib/auth/session"
+import { api } from "@/utils/api";
+
 
 import { stripe } from "@/lib/stripe"
-import { getUserSubscriptionPlan } from "@/lib/subscription"
-import { redirect } from 'next/navigation'
-
 import NavButtoms from './NavButtoms'
-import { useConfigureStore } from '@/components/store/configureStore'
 
 interface RoleFormProps {
   aSteps: ISteps[]
 }
 
-const RoleForm = async ({ aSteps }: RoleFormProps) => {
-  const user = await getCurrentUser()
-  if (!user) {
-    redirect(authOptions?.pages?.signIn || "/login")
-  }
+const RoleForm = ({ aSteps }: RoleFormProps) => {
 
-  const subscriptionPlan = await getUserSubscriptionPlan(user.id)
+  const store = useConfigureStore()
 
-  // If user has a pro plan, check cancel status on Stripe.
   let isCanceled = false
-  if (subscriptionPlan.isPro && subscriptionPlan.stripeSubscriptionId) {
-    const stripePlan = await stripe.subscriptions.retrieve(
-      subscriptionPlan.stripeSubscriptionId
-    )
-    isCanceled = stripePlan.cancel_at_period_end
+  const { data: subscriptionPlan, isLoading, isError } = api.subscription.getUserPlan.useQuery(
+    undefined, // no input
+    {
+      onSuccess: async (data) => {
+        if (data?.isPro && data.stripeSubscriptionId) {
+          const stripePlan = await stripe.subscriptions.retrieve(data.stripeSubscriptionId)
+          isCanceled = stripePlan.cancel_at_period_end
+        }
+
+      },
+    }
+  );
+  // If user has a pro plan, check cancel status on Stripe.
+
+  if (isLoading || isError) return null
+
+
+
+  const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    useConfigureStore.setState((state) => ({ role: e.target.id }))
   }
 
+  console.log('role', useConfigureStore.getState().role)
   return (
     <DashboardShell>
       <DashboardHeader
@@ -51,7 +59,8 @@ const RoleForm = async ({ aSteps }: RoleFormProps) => {
           description='Diferents role in the companies'
           className='m-0' buttoms={roleRadioButtoms}
           name={'role'}
-          value={useConfigureStore.getState().role}
+          value={store.role}
+          onChange={onChange}
         />
         <BillingForm
           subscriptionPlan={{

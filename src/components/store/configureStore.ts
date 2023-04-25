@@ -28,8 +28,7 @@ export type IConfigureStore = {
     },
     pageNumber: number,
     pagelength: number,
-    nextPage?: () => void,
-    previousPage?: () => void,
+
 }
 
 export const useConfigureStore = create<IConfigureStore>((set) => ({
@@ -59,6 +58,11 @@ export const useConfigureStore = create<IConfigureStore>((set) => ({
     },
     pageNumber: 0,
     pagelength: 0,
-    nextPage: () => set((state) => ({ pageNumber: state.pageNumber > 0 ? state.pageNumber - 1 : state.pageNumber })),
-    previousPage: () => set((state) => ({ pageNumber: state.pageNumber < state.pagelength ? state.pageNumber + 1 : state.pageNumber })),
 }))
+
+/**
+ * actions: {
+        nextPage: () => set((state) => ({ pageNumber: state.pageNumber > 0 ? state.pageNumber - 1 : state.pageNumber })),
+        previousPage: () => set((state) => ({ pageNumber: state.pageNumber < state.pagelength ? state.pageNumber + 1 : state.pageNumber }))
+    },
+ */

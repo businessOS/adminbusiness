@@ -3,31 +3,32 @@ import { Card } from '@/components/iu/atoms/card'
 import { cn } from '@/lib/utils'
 import { Button } from '@/ui/atoms/Button'
 import { FC } from 'react'
-import { useConfigureStore as store } from '@/components/store/configureStore'
+
+import { useConfigureStore } from '@/components/store/configureStore'
 
 interface NavButtomsProps {
 }
 
 const NavButtoms: FC<NavButtomsProps> = ({ }) => {
-
-    const [nextPage, previousPage] = store(
-        (state) => [state.nextPage, state.previousPage]
-    )
-
-    if (!nextPage || !previousPage) return null
+    const store = useConfigureStore()
 
     const onBackClick = () => {
-        nextPage()
+        useConfigureStore.setState((state) => ({ pageNumber: state.pageNumber - 1 }))
     }
     const onForwardClick = () => {
-        previousPage()
+        const totalPages = store.pagelength
+        const pageNumber = store.pageNumber
+        const nextPage = pageNumber < totalPages ? pageNumber + 1 : pageNumber
+
+        console.log(`page: ${pageNumber} total Pag: ${totalPages} next page: ${nextPage}`)
+        useConfigureStore.setState((state) => ({ pageNumber: nextPage }))
     }
 
     return (
         <Card className='flex-1'>
             <Card.Content className={cn('mt-4')}>
                 <div className="flex justify-start flex-grow mx-auto md:justify-end md:m-4 ">
-                    <Button className="flex-1 mr-4 " disabled={store.getState().pageNumber === 0} size='sm' onClick={onBackClick}>Back</Button>
+                    <Button className="flex-1 mr-4 " disabled={store.pageNumber === 0} size='sm' onClick={onBackClick}>Back</Button>
                     <Button className="flex-1 ml-4 " size='sm' onClick={onForwardClick}>Next</Button>
                 </div>
 
