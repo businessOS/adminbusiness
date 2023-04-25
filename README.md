@@ -76,6 +76,7 @@ An open source application built using the new router, server components and eve
 - [x] MongoDB provider. [MongoDB](https://mongodb.com)
 - [x] login.            [Next.js](https://nextjs.org) [NextAuth.js](https://next-auth.js.org)
 - [x] Implement server and client state management with zustand
+- [x] Implement server and client type safe [tRPC](https://trpc.io/docs/client/introduction)
 - [] configure first time setup (in progress)
 - [] configure stripe subscription
 - [] companies.
