@@ -25,6 +25,7 @@ An open source application built using the new router, server components and eve
 - Styled using **Tailwind CSS**
 - Validations using **Zod**
 - Client and server state management with **zustand**
+- Server and client type safe with **tRpc** and **Prisma**
 - Written in **TypeScript**
 
 ## Roadmap
