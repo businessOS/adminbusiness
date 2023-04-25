@@ -1,7 +1,8 @@
 import { db } from '@/lib/db'
 import { PrismaAdapter } from '@next-auth/prisma-adapter'
-import { NextAuthOptions } from 'next-auth'
+import { NextAuthOptions, getServerSession } from 'next-auth'
 import GoogleProvider from 'next-auth/providers/google'
+import { GetServerSidePropsContext } from 'next/types';
 
 function getGoogleCredentials(): { clientId: string; clientSecret: string } {
     const clientId = process.env.GOOGLE_CLIENT_ID
@@ -110,3 +111,16 @@ export const authOptions: NextAuthOptions = {
         },
     },
 }
+
+/**
+ * Wrapper for `getServerSession` so that you don't need to import the
+ * `authOptions` in every file.
+ *
+ * @see https://next-auth.js.org/configuration/nextjs
+ **/
+export const getServerAuthSession = (ctx: {
+    req: GetServerSidePropsContext["req"];
+    res: GetServerSidePropsContext["res"];
+}) => {
+    return getServerSession(ctx.req, ctx.res, authOptions);
+};

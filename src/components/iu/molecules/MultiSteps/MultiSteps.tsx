@@ -27,6 +27,19 @@ const imageVariants = cva(
     }
 )
 
+const textVariants = cva(
+    'mb-1 text-sm  tracking-wider md:text-base',
+    {
+        variants: {
+            variant: {
+                default: 'font-light text-gray-400 md:font-medium ',
+                focus: 'font-extrabold text-base md:text-lg text-light-text-main-color dark:text-dark-text-main-color ',
+                complete: 'text-light-text-main-color dark:text-dark-text-main-color',
+            },
+        }
+    }
+)
+
 const stateVariants = cva(
     '',
     {
@@ -63,15 +76,15 @@ const MultiSteps = forwardRef<HTMLDivElement, MultiStepsProps>(
                 {
                     aSteps.map((step, index) => (
                         <div className={cn("relative flex pl-2 pb-6 md:pb-12 max-h-24 md:max-h-28 overflow-hidden")} key={`step-${step.title}-${index}`} >
-                            <div className="absolute inset-0 top-1 flex items-center justify-center h-full w-14 ">
+                            <div className="absolute inset-0 flex items-center justify-center h-full top-1 w-14 ">
                                 {index < aSteps.length - 1 && <div className={cn(lineVariants({ variant: step.state }))}></div>}
                             </div>
                             <div className={cn(imageVariants({ variant: step.state }))}>
                                 {step.icon}
                             </div>
-                            <div className="relative pl-4 flex-0 mt-[2px] ">
-                                <h2 className="mb-1 font-light md:font-medium tracking-wider text-sm md:text-base text-light-text-main-color dark:text-dark-text-main-color">{step.title}</h2>
-                                <p className="text-xs leading-relaxed md:text-sm font-thin md:font-extralight ">{step.description}</p>
+                            <div className={index === 0 ? "relative ml-4 mt-[-2px] flex-0 " : index === 1 ? "relative ml-4 mt-[1px] flex-0 " : "relative ml-4 mt-[-2px] flex-0 "}>
+                                <h2 className={cn(textVariants({ variant: step.state }), '')}>{step.title}</h2>
+                                <p className="text-xs md:text-xs ">{step.description}</p>
                             </div>
                         </div>
                     ))

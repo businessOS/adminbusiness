@@ -9,7 +9,7 @@ import { Icons } from '@/ui/molecules/Icons'
 import { buttonVariants } from "@/ui/atoms/Button"
 import { Card } from "@/ui/atoms/card"
 
-interface BillingFormProps extends React.HTMLAttributes<HTMLFormElement> {
+interface BillingFormProps extends React.HTMLAttributes<HTMLDivElement> {
     subscriptionPlan: UserSubscriptionPlan & {
         isCanceled: boolean
     }
@@ -47,7 +47,7 @@ export function BillingForm({
     }
 
     return (
-        <form className={cn(className)} onSubmit={onSubmit} {...props}>
+        <div className={cn(className)} {...props}>
             <Card>
                 <Card.Header>
                     <Card.Title>Plan</Card.Title>
@@ -56,12 +56,13 @@ export function BillingForm({
                         plan.
                     </Card.Description>
                 </Card.Header>
-                <Card.Content className='hidden md:block text-sm md:text-base'>{subscriptionPlan.description}</Card.Content>
+                <Card.Content className='hidden text-sm md:block md:text-base'>{subscriptionPlan.description}</Card.Content>
                 <Card.Footer className="flex flex-col items-start space-y-2 md:flex-row md:justify-between md:space-x-0">
                     <button
                         type="submit"
                         className={cn(buttonVariants())}
                         disabled={isLoading}
+                        onClick={onSubmit}
                     >
                         {isLoading && (
                             <Icons.spinner className="w-4 h-4 mr-2 animate-spin" />
@@ -78,6 +79,6 @@ export function BillingForm({
                     ) : null}
                 </Card.Footer>
             </Card>
-        </form>
+        </div>
     )
 }

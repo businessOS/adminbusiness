@@ -1,20 +1,34 @@
+'use client'
 import { Card } from '@/components/iu/atoms/card'
 import { cn } from '@/lib/utils'
 import { Button } from '@/ui/atoms/Button'
 import { FC } from 'react'
+import { useConfigureStore as store } from '@/components/store/configureStore'
 
 interface NavButtomsProps {
-
 }
 
 const NavButtoms: FC<NavButtomsProps> = ({ }) => {
 
+    const [nextPage, previousPage] = store(
+        (state) => [state.nextPage, state.previousPage]
+    )
+
+    if (!nextPage || !previousPage) return null
+
+    const onBackClick = () => {
+        nextPage()
+    }
+    const onForwardClick = () => {
+        previousPage()
+    }
+
     return (
         <Card className='flex-1'>
             <Card.Content className={cn('mt-4')}>
-                <div className="flex flex-grow justify-start md:justify-end  mx-auto md:m-4 ">
-                    <Button className="mr-4 flex-1 " size='sm'>Back</Button>
-                    <Button className="ml-4 flex-1 " size='sm'>Next</Button>
+                <div className="flex justify-start flex-grow mx-auto md:justify-end md:m-4 ">
+                    <Button className="flex-1 mr-4 " disabled={store.getState().pageNumber === 0} size='sm' onClick={onBackClick}>Back</Button>
+                    <Button className="flex-1 ml-4 " size='sm' onClick={onForwardClick}>Next</Button>
                 </div>
 
             </Card.Content>
@@ -37,7 +51,6 @@ const NavButtoms: FC<NavButtomsProps> = ({ }) => {
                     </a>
                     .
                 </p>
-
 
             </Card.Footer>
         </Card>

@@ -4,12 +4,12 @@ import { Loader2 } from 'lucide-react'
 import * as React from 'react'
 
 const buttonVariants = cva(
-    'active:scale-95 inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 disabled:opacity-50 dark:focus:ring-slate-400 disabled:pointer-events-none dark:focus:ring-offset-slate-900',
+    'active:scale-95 inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-offset-2 disabled:opacity-50 dark:focus:ring-gray-500 disabled:pointer-events-none dark:focus:ring-offset-gray-900',
     {
         variants: {
             variant: {
                 default:
-                    'bg-slate-900 text-white hover:bg-slate-800 dark:bg-slate-300 dark:text-slate-900 dark:hover:bg-slate-100',
+                    'bg-slate-900 text-white hover:bg-slate-800 dark:bg-dark-aside dark:text-dark-text-main-color dark:hover:opacity-80',
                 destructive: 'text-white hover:bg-red-600 dark:hover:bg-red-600',
                 outline:
                     'bg-slate-900 text-white hover:bg-slate-800 dark:bg-slate-200 dark:text-slate-900 dark:hover:bg-slate-100 border border-slate-200 dark:border-slate-700',
@@ -46,7 +46,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
                 ref={ref}
                 disabled={isLoading}
                 {...props}>
-                {isLoading ? <Loader2 className='w-4 h-4 mr-2 animate-spin' /> : null}
+                {isLoading ? <Loader2 className='w-4 h-4 mr-2 animate-spin ' /> : null}
                 {children}
             </button>
         )

@@ -1,4 +1,3 @@
-import { FC } from 'react'
 
 export const metadata = {
     title: 'Business - Settings',
@@ -6,8 +5,10 @@ export const metadata = {
 }
 
 
-const page: FC = ({ }) => {
+const Page = async ({ }) => {
+
+
     return <div>Settings</div>
 }
 
-export default page
+export default Page

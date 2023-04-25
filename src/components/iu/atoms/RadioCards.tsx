@@ -1,18 +1,23 @@
 /* eslint-disable @next/next/no-img-element */
+'use client'
 import { cn } from '@/lib/utils'
-import { FC } from 'react'
+import { ChangeEventHandler, FC } from 'react'
 import { Card } from './card'
+
+import { type UseBoundStore } from 'zustand/react'
+import { type StoreApi } from 'zustand'
+
 
 interface RadioCardsProps {
     title?: string
     description?: string
     name: string
+    value?: string
     buttoms: IRadioButoms[]
     className?: string
 }
 
-const RadioCards: FC<RadioCardsProps> = ({ title, description, name, buttoms, className }) => {
-
+const RadioCards: FC<RadioCardsProps> = ({ title, description, name, value, buttoms, className }) => {
     return (
         <Card className={cn('border-0 md:border-2 mb-4 md:mb-0')}>
             {title &&
@@ -25,8 +30,8 @@ const RadioCards: FC<RadioCardsProps> = ({ title, description, name, buttoms, cl
                 <div className={cn(`flex flex-wrap justify-start gap-4 md:gap-6 lg:gap-8 mt-4`, className)} >
                     {buttoms.map((item, index) => (
                         <div className="relative flex-grow  min-w-[130px] md:min-w-[180px] md:max-w-[240px] lg:min-w-[240px] lg:max-w-[280px] justify " key={`radio=${item.title}-${index}`} >
-                            <input tabIndex={0} type="radio" name={name} id={item.id} className="opacity-0 absolute focus:outline-1 focus:outline-light-aside focus:dark:outline-dark-aside peer" />
-                            <label htmlFor={item.id} className="tabular-nums tabindex-0 flex items-center h-[70px] md:h-[90px] lg:max-h-[120px] gap-4 p-4 transition shadow-md cursor-pointer dark:shadow-gray-950 rounded-md md:rounded-xl bg-opacity-750 backdrop-blur-2xl bg-light-main dark:bg-dark-main hover:bg-opacity-75 peer-checked:border-2 peer-checked:border-light-primary peer-checked:dark:border-dark-text-secondary-color peer-checked:bg-light-aside peer-checked:dark:bg-dark-aside peer-focus:outline-1 peer-focus:outline-light-aside peer-focus:dark:outline-dark-aside">
+                            <input tabIndex={0} type="radio" name={name} id={item.id} value={value} className="absolute opacity-0 focus:outline-1 focus:outline-light-aside focus:dark:outline-dark-aside peer" />
+                            <label htmlFor={item.id} className="tabular-nums tabindex-0 flex items-center h-[70px] md:h-[90px] lg:max-h-[120px] gap-4 p-4 transition shadow-md cursor-pointer dark:shadow-gray-950 rounded-md md:rounded-xl bg-opacity-750 backdrop-blur-2xl bg-light-main dark:bg-dark-main hover:bg-opacity-75 peer-checked:ring-2 peer-checked:ring-gray-400 peer-checked:dark:ring-gray-500 peer-checked:bg-light-aside peer-checked:dark:bg-dark-aside peer-focus:outline-0 peer-focus:outline-light-aside peer-focus:dark:outline-dark-aside">
 
                             </label>
                             {/** We must put this code outside of the label component becouse is nedded change the icon background when the user select the radio buttom */}
@@ -34,8 +39,8 @@ const RadioCards: FC<RadioCardsProps> = ({ title, description, name, buttoms, cl
                                 {item.icon}
                             </div>
                             <div className='flex flex-col h-10 absolute top-0 left-14 md:left-[5rem] mt-[16px] md:my-[25px] '>
-                                <h6 className="my-auto select-none text-xs md:text-base cursor-not-allowed">{item.title}</h6>
-                                {!!item.description && <span className="hidden select-none text-xs md:block opacity-60">{item.description}</span>}
+                                <h6 className="my-auto text-xs cursor-not-allowed select-none md:text-base">{item.title}</h6>
+                                {!!item.description && <span className="hidden text-xs select-none md:block opacity-60">{item.description}</span>}
                             </div>
                             <div className="flex absolute top-0 right-[-6px] bottom-0 w-7 h-7 my-[-6px] rounded-full bg-light-primary dark:bg-dark-primary  scale-0 peer-checked:scale-100 transition delay-100">
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" className="w-5 mx-auto my-auto text-white " viewBox="0 0 16 16">

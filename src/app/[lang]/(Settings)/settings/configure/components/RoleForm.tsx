@@ -13,8 +13,9 @@ import { getCurrentUser } from "@/lib/auth/session"
 import { stripe } from "@/lib/stripe"
 import { getUserSubscriptionPlan } from "@/lib/subscription"
 import { redirect } from 'next/navigation'
-import { cn } from '@/lib/utils'
+
 import NavButtoms from './NavButtoms'
+import { useConfigureStore } from '@/components/store/configureStore'
 
 interface RoleFormProps {
   aSteps: ISteps[]
@@ -44,11 +45,13 @@ const RoleForm = async ({ aSteps }: RoleFormProps) => {
         text="Manage Role, billing and your subscription plan."
       />
       <div className="grid gap-4 md:gap-6 lg:gap-8 ">
+        {/* client componenct */}
         <RadioCards
           title='User type'
           description='Diferents role in the companies'
           className='m-0' buttoms={roleRadioButtoms}
           name={'role'}
+          value={useConfigureStore.getState().role}
         />
         <BillingForm
           subscriptionPlan={{

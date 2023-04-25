@@ -12,7 +12,7 @@ An open source application built using the new router, server components and eve
 
 - New `/app` dir,
 - Routing, Layouts, Nested Layouts and Layout Groups
-- Data Fetching, Caching and Mutation
+- Data Fetching, Caching and Mutation with **tRPC**
 - Loading UI
 - Server and Client Components
 - API Routes and Middlewares
@@ -24,6 +24,7 @@ An open source application built using the new router, server components and eve
 - Subscriptions using **Stripe**
 - Styled using **Tailwind CSS**
 - Validations using **Zod**
+- Client and server state management with **zustand**
 - Written in **TypeScript**
 
 ## Roadmap
@@ -40,7 +41,9 @@ An open source application built using the new router, server components and eve
 - [x] MongoDB with Prisma [Advanced MongoDB Workshop](https://prismaio.notion.site/Advanced-MongoDB-Workshop-4a11353478b2410aa3768ca59c274507)
 - [x] Model / [Prisma](https://prisma.io)
 - [] Components
-- [x] Adapters / [Prisma](https://prisma.io)
+- [x] server fetch Adapters / [Prisma](https://prisma.io)
+- [x] client fetch Adapters / [tRPC](https://trpc.io/docs/client/introduction)
+- [x] combine prisma and trpc to get type safe in client side [fullstack type safe](https://www.prisma.io/nextjs)
 - [] External services
 
 ## Build basic
@@ -60,17 +63,18 @@ An open source application built using the new router, server components and eve
 
 ## Design function of the structure of the application
 
-- [] General options menus
+- [x] General options menus
 - [] Sub Menu of specific options
 - [] Design of the structure of each specific module
 - [] List Design (Infinite list layout)
-- [] General screen layout
+- [x] General screen layout
 
 ## Build business logic
 
 - [x] Prisma schemas.   [Prisma](https://prisma.io)
 - [x] MongoDB provider. [MongoDB](https://mongodb.com)
 - [x] login.            [Next.js](https://nextjs.org) [NextAuth.js](https://next-auth.js.org)
+- [x] Implement server and client state management with zustand
 - [] configure first time setup (in progress)
 - [] configure stripe subscription
 - [] companies.
@@ -137,7 +141,7 @@ A list of things not working right now:
 2. ~[Prisma: Error: ENOENT: no such file or directory, open '/var/task/.next/server/chunks/schema.prisma'](https://github.com/prisma/prisma/issues/16117)~
 3. ~[Next.js 13: Client side navigation does not update head](https://github.com/vercel/next.js/issues/42414)~
 
-## Why not tRPC, Turborepo or X?
+## Why not Turborepo or X?
 
 I might add this later. For now, I want to see how far we can get using Next.js only.
 

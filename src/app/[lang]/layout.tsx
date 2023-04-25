@@ -50,7 +50,7 @@ export default function RootLayout({
   params: { lang: string }
 }) {
   return (
-    <html lang={params.lang} className={cn('text-light-text-main-color dark:text-dark-text-main-color  text-sm font-normal font-sans', verdana.variable)}>
+    <html lang={params.lang} className={cn('text-light-text-main-color dark:text-dark-text-main-color  text-sm font-normal', verdana.variable)}>
       <body className='overflow-hidden antialiased'>
         <Providers>
           <Toaster position='bottom-right' />

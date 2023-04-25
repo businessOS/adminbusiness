@@ -32,7 +32,7 @@ const Wrapper = async ({ children, lang }: { children: ReactNode, lang: string; 
                 name={session?.user.name}
                 image={session?.user.image}
                 email={session?.user.email}
-                description=''
+                description={session?.user.description}
             />
             <div className='flex justify-end gap-4 pb-2 pr-2 align-middle flex-0'>
                 <ThemeToggle />
@@ -43,7 +43,7 @@ const Wrapper = async ({ children, lang }: { children: ReactNode, lang: string; 
                 <div className={cn('flex flex-col-reverse flex-1 gap-4 overflow-hidden rounded-md shadow-2xl md:flex-row bg-light-main shadow-slate-950 dark:bg-dark-main sm:border-8 sm:rounded-xl sm:border-light-border dark:sm:border-dark-border')}>
                     <Aside lang={lang} />
                     <div className="flex flex-col flex-grow max-h-[85vh] mx-4 my-4 border-0 md:border-2 dark:border-gray-800">
-                        <div className="flex flex-col flex-grow mx-auto md:m-4 scroll-smooth scrollbar-thumb-rounded-full scrollbar-track-rounded-fulls scrollbar-thin scrollbar-thumb-light-aside dark:scrollbar-thumb-dark-aside overflow-y-auto hover:scrollbar-thumb-black">
+                        <div className="flex flex-col flex-grow mx-auto overflow-y-auto md:m-4 scroll-smooth scrollbar-thumb-rounded-full scrollbar-track-rounded-fulls scrollbar-thin scrollbar-thumb-light-aside dark:scrollbar-thumb-dark-aside hover:scrollbar-thumb-black">
                             {showMenu && <NavBar lang={lang} />}
                             {children}
                         </div>
