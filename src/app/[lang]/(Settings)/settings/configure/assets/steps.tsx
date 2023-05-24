@@ -33,3 +33,5 @@ export const configureASteps: ISteps[] = [
         state: 'default',
     },
 ]
+
+export const CompanyStepoPos = 2;

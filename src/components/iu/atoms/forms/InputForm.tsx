@@ -1,12 +1,14 @@
 import * as React from 'react'
 
 import { cn } from '@/lib/utils'
+import { KeyboardEventHandler } from 'react';
 
 export interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
     label?: string;
     name: string;
     error?: string;
-    validateAs: 'text' | 'number' | 'decimal' | 'email' | 'date' | 'tel';
+    validateAs?: 'text' | 'number' | 'decimal' | 'email' | 'date' | 'tel';
+    onChange?: React.ChangeEventHandler<HTMLInputElement> | undefined
 }
 
 function getPattern(type: string) {
@@ -35,28 +37,30 @@ function getPattern(type: string) {
 }
 
 const InputForm = React.forwardRef<HTMLInputElement, InputProps>(
-    ({ validateAs, label, name, error, className, ...props }, ref) => {
+    ({ validateAs, label, name, error, className, onChange, ...props }, ref) => {
+
         return (
-            <div className="flex flex-col">
-                <label htmlFor={name}>{label ?? name}</label>
+            <div className="flex flex-col flex-1 min-w-[150px] md:min-w-[250px] lg:min-w-[250px]  mx-2">
+                <label className='mb-2 text-xs md:text-sm' htmlFor={name}>{label ?? name}</label>
                 <input
                     type={validateAs ?? 'text'}
                     name={name}
                     id={name}
                     required={props.required}
-                    pattern={getPattern(validateAs)}
+                    pattern={getPattern(validateAs ?? 'text')}
                     className={cn(
-                        'peer flex h-10 w-full rounded-md border border-slate-300 bg-transparent py-2 px-3 text-sm placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 dark:border-slate-700 dark:text-slate-50 dark:focus:ring-slate-400 dark:focus:ring-offset-slate-900',
-                        'placeholder-shown:peer-invalid:border-2 placeholder-shown:peer-invalid:text-red-700 placeholder-shown:peer-invalid:border-red-700',
+                        'peer flex h-8 md:h-9 w-full rounded-md border border-slate-300 bg-transparent py-2 px-3 text-xs md:text-sm placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 dark:border-slate-700 dark:text-slate-50 dark:focus:ring-slate-400 dark:focus:ring-offset-slate-900',
+                        'peer-invalid:outline-none peer-invalid:ring-2 peer-invalid:ring-red-400 invalid:ring-offset-2',
                         className
                     )}
                     ref={ref}
                     placeholder={props.placeholder ?? ' '}
+                    onChange={onChange}
                     {...props}
                 />
-                <p className="invisible font-light text-red-700 peer-invalid:visible">
-                    {error ?? 'Please indicate the value for ' + label}
-                </p>
+                <span className="invisible font-extralight text-[0.70rem] text-slate-400 dark:text-slate-600 peer-invalid:visible mt-2 mb-4">
+                    * {error ?? 'Please indicate the value for ' + label}
+                </span>
             </div>
         )
     }

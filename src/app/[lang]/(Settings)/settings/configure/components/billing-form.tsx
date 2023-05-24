@@ -59,7 +59,7 @@ export function BillingForm({
                 <Card.Content className='hidden text-sm md:block md:text-base'>{subscriptionPlan.description}</Card.Content>
                 <Card.Footer className="flex flex-col items-start space-y-2 md:flex-row md:justify-between md:space-x-0">
                     <button
-                        type="submit"
+                        type="button"
                         className={cn(buttonVariants())}
                         disabled={isLoading}
                         onClick={onSubmit}

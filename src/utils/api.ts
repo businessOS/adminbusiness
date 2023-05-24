@@ -29,6 +29,7 @@ export const api = createTRPCNext<AppRouter>({
        **/
       transformer: superjson,
 
+      abortOnUnmount: true,
       /**
        * Links used to determine request flow from client to server.
        *
@@ -44,6 +45,15 @@ export const api = createTRPCNext<AppRouter>({
           url: `${getBaseUrl()}/api/trpc`,
         }),
       ],
+      // Change options globally
+      queryClientConfig: {
+        defaultOptions: {
+          queries: {
+            refetchOnMount: false,
+            refetchOnWindowFocus: false,
+          },
+        },
+      },
     };
   },
   /**

@@ -1,4 +1,6 @@
+'use client'
 /* eslint-disable @next/next/no-img-element */
+
 import { cn } from '@/lib/utils';
 import { cva, VariantProps } from 'class-variance-authority';
 import { forwardRef, HTMLAttributes } from 'react'
@@ -8,7 +10,10 @@ const lineVariants = cva(
     {
         variants: {
             variant: {
-                default: '', focus: '', complete: 'bg-gray-800',
+                default: '',
+                focus: '',
+                complete: 'bg-gray-800',
+                disable: ''
             },
         },
     }
@@ -21,7 +26,8 @@ const imageVariants = cva(
             variant: {
                 default: 'text-gray-500 bg-indigo-300',
                 focus: 'p-2 mt-2 text-gray-500 bg-indigo-300 ring-offset-2 ring-1 ring-indigo-800 dark:ring-gray-500',
-                complete: 'text-white bg-indigo-800',
+                complete: 'text-white bg-indigo-800 w-11 h-11',
+                disable: 'text-gray-400 bg-gray-300 dark:text-gray-600 dark:bg-gray-700',
             },
         }
     }
@@ -32,9 +38,10 @@ const textVariants = cva(
     {
         variants: {
             variant: {
-                default: 'font-light text-gray-400 md:font-medium ',
+                default: 'font-light text-gray-400 md:font-medium',
                 focus: 'font-extrabold text-base md:text-lg text-light-text-main-color dark:text-dark-text-main-color ',
                 complete: 'text-light-text-main-color dark:text-dark-text-main-color',
+                disable: 'font-light text-gray-500 md:font-medium',
             },
         }
     }
@@ -64,7 +71,6 @@ export interface MultiStepsProps extends HTMLAttributes<HTMLDivElement>,
     aSteps?: ISteps[]
 }
 
-
 const MultiSteps = forwardRef<HTMLDivElement, MultiStepsProps>(
     ({ className, variant, aSteps, ...props }, ref) => {
         // create a error if there is not almost 2 stepts
@@ -83,8 +89,8 @@ const MultiSteps = forwardRef<HTMLDivElement, MultiStepsProps>(
                                 {step.icon}
                             </div>
                             <div className={index === 0 ? "relative ml-4 mt-[-2px] flex-0 " : index === 1 ? "relative ml-4 mt-[1px] flex-0 " : "relative ml-4 mt-[-2px] flex-0 "}>
-                                <h2 className={cn(textVariants({ variant: step.state }), '')}>{step.title}</h2>
-                                <p className="text-xs md:text-xs ">{step.description}</p>
+                                <h2 className={cn(textVariants({ variant: step.state }))}>{step.title}</h2>
+                                <p className={cn(textVariants({ variant: step.state }), 'text-xs md:text-xs')}>{step.description}</p>
                             </div>
                         </div>
                     ))

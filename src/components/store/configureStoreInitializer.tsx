@@ -5,6 +5,8 @@ import { useRef } from "react";
 
 function ConfigureStoreInitializer({
     name,
+    lastName,
+    email,
     id,
     userId,
     partition,
@@ -30,14 +32,15 @@ function ConfigureStoreInitializer({
     },
     pageNumber,
     pagelength,
-    nextPage,
-    previousPage,
+    steps,
 }: IConfigureStore) {
     const initialized = useRef(false)
 
     if (!initialized.current) {
         useConfigureStore.setState({
             name,
+            lastName,
+            email,
             id,
             userId,
             partition,
@@ -63,8 +66,7 @@ function ConfigureStoreInitializer({
             },
             pageNumber,
             pagelength,
-            nextPage,
-            previousPage,
+            steps,
         })
         initialized.current = true
     }

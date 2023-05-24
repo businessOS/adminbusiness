@@ -1,12 +1,12 @@
 import { configureASteps } from './assets/steps'
 import { cn } from "@/lib/utils"
-import MultiSteps from '@/ui/molecules/MultiSteps/MultiSteps'
-
-
 
 import ConfigureStoreInitializer from '@/components/store/configureStoreInitializer'
+import { useUserStore } from "@/components/store/userStore"
+
 import { useConfigureStore } from '@/components/store/configureStore'
 import FormComponent from './components/FormComponent'
+import ConfigureMultSteps from './components/ConfigureMultSteps'
 
 
 export const metadata = {
@@ -19,6 +19,8 @@ const page = ({ }) => {
   // Server & Client state management with zustand
   useConfigureStore.setState({
     name: '',
+    lastName: '',
+    email: useUserStore.getState().email ?? '',
     id: '',
     userId: '',
     partition: '',
@@ -44,11 +46,13 @@ const page = ({ }) => {
     },
     pageNumber: 0,
     pagelength: configureASteps.length,
+    steps: configureASteps
   })
 
   return (
     <div className='flex flex-col-reverse flex-1 overflow-hidden rounded-md shadow-2xl md:flex-row bg-light-main shadow-slate-950 dark:bg-dark-main sm:border-8 sm:rounded-xl sm:border-light-border dark:sm:border-dark-border'>
-      <ConfigureStoreInitializer name={''} id={''} userId={''} partition={''} username={''} isSetup={false} role={''} description={''}
+      <ConfigureStoreInitializer name={''} lastName='' id={''} userId={''} partition={''} username={''} isSetup={false} role={''} description={''}
+        email={useUserStore.getState().email ?? ''}
         address={{
           city: '',
           country: '',
@@ -65,10 +69,11 @@ const page = ({ }) => {
         }}
         pageNumber={0}
         pagelength={configureASteps.length}
+        steps={configureASteps}
       />
 
       <aside className={cn('flex flex-col m-4 mt-0 md:mt-4 md:flex-initial md:w-1/3 lg:w-1/4 bg-light-aside dark:bg-dark-aside rounded-bl-xl rounded-br-xl md:rounded-none md:rounded-s-xl')}>
-        <MultiSteps aSteps={configureASteps} />
+        <ConfigureMultSteps />
       </aside>
 
       <div className="flex flex-col flex-0 md:flex-grow md:max-h-[85vh] mx-4 my-4 border-0 md:border-2 dark:border-gray-800 overflow-hidden">
@@ -85,55 +90,3 @@ export default page
 
 
 
-/**
- * 
- type Subscription {
-  active  String
-  expires DateTime
-  token   String
-}
-
-* 
-type Address {
-  city     String
-  country  String
-  dir      String
-  number   String
-  postCode String
-  state    String
-  street   String
-}
-
-type Phone {
-  main   Int
-  office String
-  mobile String
-  fax    String
-}
- 
- type perfil {
-  id                 String       @id @default(auto()) @map("_id") @db.ObjectId
-  userId             String       @db.ObjectId
-  partition          String       @unique @map("_partition")
-  username           String       @default("")
-  isSetup            Boolean      @default(false)
-  role               String       @default("none")
-  canReadPartitions  String[]
-  canWritePartitions String[]
-  address            Address
-  phones             Phone
-  description        String       @default("")
-  subscription       Subscription  
- }
-
-type User {
-  id            String     @id @default(auto()) @map("_id") @db.ObjectId
-  name          String?    @default("")
-  email         String?    @unique
-  emailVerified DateTime?
-  image         String?    @map("picture")
-  apiKey        ApiKey[]
-  apiKeyId      String?
-}
-
- */

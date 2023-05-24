@@ -5,6 +5,12 @@ import { configureASteps } from '../assets/steps'
 import ProfileForm from './ProfileForm'
 import RoleForm from './RoleForm'
 
+
+import { UserSubscriptionPlan } from "@/types/types.d"
+import { api } from "@/utils/api";
+import { stripe } from "@/lib/stripe"
+import CompanyComponentStep from './CompanyComponentStep'
+
 interface FormComponentProps {
     children?: ReactNode
 }
@@ -12,18 +18,37 @@ interface FormComponentProps {
 const FormComponent: FC<FormComponentProps> = ({ children }) => {
     const store = useConfigureStore()
 
+    let isCanceled = false
+    const { data: subscriptionPlan, isLoading, isError } = api.subscription.getUserPlan.useQuery(
+        undefined, // no input
+        {
+            onSuccess: async (data: UserSubscriptionPlan) => {
+                if (data?.isPro && data.stripeSubscriptionId) {
+                    console.log('fetch sucess')
+                    const stripePlan = await stripe.subscriptions.retrieve(data.stripeSubscriptionId)
+                    isCanceled = stripePlan.cancel_at_period_end
+                }
+            },
+
+        }
+    );
+    // If user has a pro plan, check cancel status on Stripe.
+
+    if (isLoading || isError) return null
+
     const handleOnSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-        event.preventDefault()
+        //event.preventDefault()
         const newData = new FormData(event.currentTarget)
         const payLoad = Object.fromEntries(newData)
     }
 
-    console.log(`role: ${store.role}`)
-    console.log(`page: ${store.pageNumber}`)
-
-    return <form onSubmit={handleOnSubmit}>
-        {store.pageNumber === 0 && <RoleForm aSteps={configureASteps} />}
-        {store.pageNumber === 1 && <ProfileForm />}
+    return <form onSubmit={handleOnSubmit} autoFocus>
+        <RoleForm className={store.pageNumber === 0 ? 'visible' : 'hidden'} subscriptionPlan={{
+            ...subscriptionPlan,
+            isCanceled
+        }} aSteps={configureASteps} />
+        <ProfileForm className={store.pageNumber === 1 ? 'visible' : 'hidden'} />
+        <CompanyComponentStep className={store.pageNumber === 2 ? 'visible' : 'hidden'} />
     </form>
 }
 

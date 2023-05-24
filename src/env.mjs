@@ -7,6 +7,16 @@ import { z } from "zod";
 const server = z.object({
   DATABASE_URL: z.string().url(),
   NODE_ENV: z.enum(["development", "test", "production"]),
+
+  NEXTAUTH_SECRET: z.string().nonempty(),
+  NEXTAUTH_URL: z.string().nonempty(),
+
+  GOOGLE_CLIENT_ID: z.string().nonempty(),
+  GOOGLE_CLIENT_SECRET: z.string().nonempty(),
+
+  STRIPE_WEBHOOK_SECRET: z.string().nonempty(),
+  STRIPE_PRO_MONTHLY_PLAN_ID: z.string().nonempty(),
+  STRIPE_API_KEY: z.string().nonempty(),
 });
 
 /**
@@ -26,6 +36,17 @@ const client = z.object({
 const processEnv = {
   DATABASE_URL: process.env.DATABASE_URL,
   NODE_ENV: process.env.NODE_ENV,
+
+  NEXTAUTH_SECRET: process.env.NEXTAUTH_SECRET,
+  NEXTAUTH_URL: process.env.NEXTAUTH_URL,
+
+  GOOGLE_CLIENT_ID: process.env.GOOGLE_CLIENT_ID,
+  GOOGLE_CLIENT_SECRET: process.env.GOOGLE_CLIENT_SECRET,
+
+  STRIPE_WEBHOOK_SECRET: process.env.STRIPE_WEBHOOK_SECRET,
+  STRIPE_PRO_MONTHLY_PLAN_ID: process.env.STRIPE_PRO_MONTHLY_PLAN_ID,
+  STRIPE_API_KEY: process.env.STRIPE_API_KEY,
+
   // NEXT_PUBLIC_CLIENTVAR: process.env.NEXT_PUBLIC_CLIENTVAR,
 };
 
@@ -52,7 +73,7 @@ if (!!process.env.SKIP_ENV_VALIDATION == false) {
   if (parsed.success === false) {
     console.error(
       "❌ Invalid environment variables:",
-      parsed.error.flatten().fieldErrors,
+      parsed.error.flatten().fieldErrors
     );
     throw new Error("Invalid environment variables");
   }
@@ -66,7 +87,7 @@ if (!!process.env.SKIP_ENV_VALIDATION == false) {
         throw new Error(
           process.env.NODE_ENV === "production"
             ? "❌ Attempted to access a server-side environment variable on the client"
-            : `❌ Attempted to access server-side environment variable '${prop}' on the client`,
+            : `❌ Attempted to access server-side environment variable '${prop}' on the client`
         );
       return target[/** @type {keyof typeof target} */ (prop)];
     },

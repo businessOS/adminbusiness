@@ -8,46 +8,45 @@ import { BillingForm } from './billing-form'
 
 import { useConfigureStore } from '@/components/store/configureStore'
 
-import { api } from "@/utils/api";
-
-
-import { stripe } from "@/lib/stripe"
 import NavButtoms from './NavButtoms'
+import { UserSubscriptionPlan } from "@/types/types.d"
+import { cn } from '@/lib/utils'
+import { CompanyStepoPos } from '../assets/steps'
 
-interface RoleFormProps {
+interface RoleFormProps extends React.HTMLAttributes<HTMLDivElement> {
+  subscriptionPlan: UserSubscriptionPlan & {
+    isCanceled: boolean
+  }
   aSteps: ISteps[]
+  className?: string
 }
 
-const RoleForm = ({ aSteps }: RoleFormProps) => {
+const RoleForm = ({ subscriptionPlan, aSteps, ...props }: RoleFormProps) => {
 
   const store = useConfigureStore()
+  const updateStep = store.updateStep
 
-  let isCanceled = false
-  const { data: subscriptionPlan, isLoading, isError } = api.subscription.getUserPlan.useQuery(
-    undefined, // no input
-    {
-      onSuccess: async (data) => {
-        if (data?.isPro && data.stripeSubscriptionId) {
-          const stripePlan = await stripe.subscriptions.retrieve(data.stripeSubscriptionId)
-          isCanceled = stripePlan.cancel_at_period_end
-        }
-
-      },
-    }
-  );
-  // If user has a pro plan, check cancel status on Stripe.
-
-  if (isLoading || isError) return null
-
-
-
-  const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    useConfigureStore.setState((state) => ({ role: e.target.id }))
+  const validate = () => {
+    return !!store.role
   }
 
-  console.log('role', useConfigureStore.getState().role)
+  const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+
+    if (!!e.target.id)
+      useConfigureStore.setState(() => ({ role: e.target.id }))
+
+    if (updateStep) {
+      const stepTitle = store.steps[CompanyStepoPos].title
+      const stateValue = e.target.id === 'company' ? 'default' : 'disable'
+      console.log(`step: ${stepTitle} state:${stateValue}`)
+
+      updateStep(stepTitle, stateValue)
+    }
+
+  }
+
   return (
-    <DashboardShell>
+    <DashboardShell className={cn('max-w-[90rem] max-h-[70vh]', props.className)}>
       <DashboardHeader
         heading="Role"
         text="Manage Role, billing and your subscription plan."
@@ -65,10 +64,9 @@ const RoleForm = ({ aSteps }: RoleFormProps) => {
         <BillingForm
           subscriptionPlan={{
             ...subscriptionPlan,
-            isCanceled,
           }}
         />
-        <NavButtoms />
+        <NavButtoms validate={validate} />
       </div>
     </DashboardShell>
   )
