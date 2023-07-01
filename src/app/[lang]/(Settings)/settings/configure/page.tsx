@@ -1,4 +1,4 @@
-import { configureASteps } from './assets/steps'
+import { configureASteps } from './_assets/steps'
 import { cn } from "@/lib/utils"
 
 import { useConfigureStore } from '@/interfaces/configure/configureStore'

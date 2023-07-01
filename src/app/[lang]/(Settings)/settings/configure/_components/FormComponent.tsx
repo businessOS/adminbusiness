@@ -1,7 +1,7 @@
 'use client'
 import { FC, ReactNode, useEffect, useState } from 'react'
 import { useConfigureStore } from '@/interfaces/configure/configureStore'
-import { configureASteps } from '../assets/steps'
+import { configureASteps } from '../_assets/steps'
 import ProfileForm from './ProfileForm'
 import RoleForm from './RoleForm'
 

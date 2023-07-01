@@ -3,7 +3,7 @@ import { DashboardHeader } from '@/components/iu/atoms/Header'
 import RadioCards from '@/components/iu/atoms/RadioCards'
 import { DashboardShell } from '@/components/iu/atoms/shell'
 
-import { roleRadioButtoms } from '../assets/radiobuttoms'
+import { roleRadioButtoms } from '../_assets/radiobuttoms'
 import { BillingForm } from './billing-form'
 
 import { useConfigureStore } from '@/interfaces/configure/configureStore'
@@ -11,7 +11,7 @@ import { useConfigureStore } from '@/interfaces/configure/configureStore'
 import NavButtoms from './NavButtoms'
 import { UserSubscriptionPlan } from "@/models/types"
 import { cn } from '@/lib/utils'
-import { CompanyStepoPos } from '../assets/steps'
+import { CompanyStepoPos } from '../_assets/steps'
 
 interface RoleFormProps extends React.HTMLAttributes<HTMLDivElement> {
   subscriptionPlan: UserSubscriptionPlan & {
