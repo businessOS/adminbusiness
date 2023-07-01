@@ -8,8 +8,8 @@ import NavBar from '@/ui/molecules/NavBar'
 import { getServerSession } from 'next-auth'
 import { authOptions } from '@/lib/auth/auth'
 
-import { useUserStore } from "@/components/store/userStore"
-import UserStoreInitializer from '@/components/store/userStoreInitializer'
+import { useUserStore } from "@/interfaces/users/userStore"
+import UserStoreInitializer from '@/interfaces/users/userStoreInitializer'
 
 const Wrapper = async ({ children, lang }: { children: ReactNode, lang: string; }) => {
     const session = await getServerSession(authOptions)

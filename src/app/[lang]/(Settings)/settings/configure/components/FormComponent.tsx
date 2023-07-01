@@ -1,12 +1,12 @@
 'use client'
 import { FC, ReactNode, useEffect, useState } from 'react'
-import { useConfigureStore } from '@/components/store/configureStore'
+import { useConfigureStore } from '@/interfaces/configure/configureStore'
 import { configureASteps } from '../assets/steps'
 import ProfileForm from './ProfileForm'
 import RoleForm from './RoleForm'
 
 
-import { UserSubscriptionPlan } from "@/types/types.d"
+import { UserSubscriptionPlan } from "@/models/types"
 import { api } from "@/utils/api";
 import { stripe } from "@/lib/stripe"
 import CompanyComponentStep from './CompanyComponentStep'

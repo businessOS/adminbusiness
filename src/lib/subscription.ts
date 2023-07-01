@@ -1,7 +1,7 @@
 // @ts-nocheck
 // TODO: Fix this when we turn strict mode on.
-import { UserSubscriptionPlan } from "@/types/types"
-import { freePlan, proPlan } from "@/config/subscriptions"
+import { UserSubscriptionPlan } from "@/models/types"
+import { freePlan, proPlan } from "@/utils/config/subscriptions"
 import { db } from "@/lib/db"
 
 export async function getUserSubscriptionPlan(

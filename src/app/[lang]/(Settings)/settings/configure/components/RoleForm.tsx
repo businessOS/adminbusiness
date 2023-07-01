@@ -6,10 +6,10 @@ import { DashboardShell } from '@/components/iu/atoms/shell'
 import { roleRadioButtoms } from '../assets/radiobuttoms'
 import { BillingForm } from './billing-form'
 
-import { useConfigureStore } from '@/components/store/configureStore'
+import { useConfigureStore } from '@/interfaces/configure/configureStore'
 
 import NavButtoms from './NavButtoms'
-import { UserSubscriptionPlan } from "@/types/types.d"
+import { UserSubscriptionPlan } from "@/models/types"
 import { cn } from '@/lib/utils'
 import { CompanyStepoPos } from '../assets/steps'
 

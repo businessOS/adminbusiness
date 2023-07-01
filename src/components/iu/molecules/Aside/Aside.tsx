@@ -27,7 +27,7 @@ interface AsideProps {
     lang: string
 }
 
-const Aside: FC<AsideProps> = async ({ children, lang, }) => {
+const Aside: FC<AsideProps> = ({ children, lang, }) => {
     return (
         <aside className='flex sm:flex-col w-auto md:w-[200px] lg:w-[250px]  md:h-min-h-[620px]  py-6 bg-light-aside dark:bg-dark-aside z-10 rounded-bl-xl rounded-br-xl md:rounded-none md:rounded-s-xl'>
             <LogoCard />

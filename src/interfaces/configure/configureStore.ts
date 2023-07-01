@@ -1,6 +1,11 @@
 import { create } from 'zustand'
 import { z } from 'zod';
 
+import { ICompanies } from '@/models/companies/ICompanies'
+
+const phoneRegex = new RegExp(
+    /^([+]?[\s0-9]+)?(\d{3}|[(]?[0-9]+[)])?([-]?[\s]?[0-9])+$/)
+
 const updateStep = (steps: ISteps[], title: string, state: 'complete' | 'focus' | 'default' | 'disable'): ISteps[] =>
     steps.map((step) => ({
         ...step,
@@ -28,13 +33,14 @@ export type IConfigureStore = {
         postCode: string;
         state: string;
         street: string;
-    };
+    },
     phones: {
         main: 1;
         office: string;
         mobile: string;
         fax: string;
-    };
+    },
+    company?: ICompanies,
     pageNumber: number;
     pagelength: number;
     steps: ISteps[];
@@ -68,6 +74,44 @@ export const useConfigureStore = create<IConfigureStore>((set) => ({
         office: '',
         mobile: '',
         fax: '',
+    },
+    company: {
+        id: '',
+        partition: '',
+        groupId: '',
+        ownerId: '',
+        NIF: '',
+        picture: '',
+        imageUrl: '',
+        logoUrl: '',
+        isActive: false,
+        canTransferGoods: false,
+        sharedProducts: false,
+        name: '',
+        descriptions: '',
+        oganization: '',
+        address: {
+            city: '',
+            country: '',
+            dir: '',
+            number: '',
+            postCode: '',
+            state: '',
+            street: '',
+        },
+        phones: {
+            main: 0,
+            office: '',
+            mobile: '',
+            fax: '',
+        },
+        localitation: {
+            type: '',
+            coord: {
+                lat: 0,
+                long: 0,
+            },
+        },
     },
     pageNumber: 0,
     pagelength: 0,
@@ -135,7 +179,46 @@ const ProfileData = z.object({
     }),
 })
 
-export const validateConfigureStore = (store: unknown, step: 'all' | 'role' | 'profile') => {
+const CompanyData = z.object({
+    id: z.string(),
+    partition: z.string(),
+    groupId: z.string().min(2),
+    ownerId: z.string().min(2),
+    NIF: z.string().min(10),
+    picture: z.string().optional(),
+    imageUrl: z.string().optional(),
+    logoUrl: z.string().optional(),
+    isActive: z.boolean(),
+    canTransferGoods: z.boolean(),
+    sharedProducts: z.boolean(),
+    name: z.string().min(2),
+    descriptions: z.string().min(5),
+    oganization: z.string().min(5),
+    address: z.object({
+        city: z.string().min(4),
+        country: z.string().min(4),
+        dir: z.string().min(4),
+        number: z.string().min(1),
+        postCode: z.string().min(4),
+        state: z.string().min(4),
+        street: z.string().optional(),
+    }),
+    phones: z.object({
+        main: z.string().regex(phoneRegex, 'Invalid Number!'),
+        office: z.string().regex(phoneRegex, 'Invalid Number!'),
+        mobile: z.string().regex(phoneRegex, 'Invalid Number!'),
+        fax: z.string().regex(phoneRegex, 'Invalid Number!'),
+    }),
+    localitation: z.object({
+        type: z.string(),
+        coord: z.object({
+            lat: z.number(),
+            long: z.number(),
+        })
+    }),
+})
+
+export const validateConfigureStore = (store: unknown, step: 'all' | 'role' | 'profile' | 'company') => {
     let isValidData = false
 
     switch (step) {
@@ -146,6 +229,12 @@ export const validateConfigureStore = (store: unknown, step: 'all' | 'role' | 'p
             const data = ProfileData.safeParse(store)
             console.log('validating profile: ', data)
             isValidData = data.success
+            break;
+        case 'company':
+            const dataCo = CompanyData.safeParse(store)
+            console.log('validating company: ', dataCo)
+            isValidData = dataCo.success
+            break;
         default:
             break;
     }

@@ -8,7 +8,7 @@ import { usePathname } from 'next/navigation'
 
 import { useRouter } from 'next/navigation';
 
-import { i18n } from '../../../i18n-config'
+import { i18n } from '../../../utils/i18n-config'
 import './LanguageToggle.css'
 
 const LanguageToggle: FC = ({ }) => {

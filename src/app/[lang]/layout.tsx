@@ -1,4 +1,4 @@
-import Providers from '@/components/Providers'
+
 import Wrapper from '@/components/iu/molecules/Layouts/Wrapper'
 import { Toaster } from '@/ui/atoms/toast'
 
@@ -6,7 +6,8 @@ import { cn } from '@/lib/utils'
 import '@/styles/globals.css'
 
 import localFont from 'next/font/local'
-import { i18n } from '@/i18n-config'
+import { i18n } from '@/utils/i18n-config'
+import Providers from '@/interfaces/providers/Providers'
 
 const verdana = localFont({
   src: [

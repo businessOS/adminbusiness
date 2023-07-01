@@ -3,7 +3,7 @@
 import * as React from "react"
 import { toast } from '@/ui/atoms/toast'
 
-import { UserSubscriptionPlan } from "@/types/types.d"
+import { UserSubscriptionPlan } from "@/models/types"
 import { cn, formatDate } from "@/lib/utils"
 import { Icons } from '@/ui/molecules/Icons'
 import { buttonVariants } from "@/ui/atoms/Button"

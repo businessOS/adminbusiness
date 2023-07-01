@@ -1,5 +1,6 @@
 'use client'
-import { useConfigureStore } from '@/components/store/configureStore'
+
+import { useConfigureStore } from '@/interfaces/configure/configureStore'
 import MultiSteps from '@/ui/molecules/MultiSteps/MultiSteps'
 import { FC } from 'react'
 

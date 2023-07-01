@@ -16,16 +16,17 @@ An open source application built using the new router, server components and eve
 - Loading UI
 - Server and Client Components
 - API Routes and Middlewares
-- Authentication using **NextAuth.js**
-- ORM using **Prisma**
-- Database on **MongoDB**
-- UI Components built using **Radix UI**
+- Authentication using **NextAuth.js** <https://next-auth.js.org/>
+- ORM using **Prisma** <https://www.prisma.io/>
+- DATA PROXY **Prisma** Scaling database connections in Serverless functions [data-proxy]<https://www.prisma.io/data-platform/proxy>
+- Database on **MongoDB** <https://www.mongodb.com/>
+- Styled using **Tailwind CSS** <https://tailwindcss.com/>
+- UI Components built using **Radix UI** <https://www.radix-ui.com/>
 - Documentation and blog using **MDX** and **Contentlayer**
-- Subscriptions using **Stripe**
-- Styled using **Tailwind CSS**
-- Validations using **Zod**
-- Client and server state management with **zustand**
-- Server and client type safe with **tRpc** and **Prisma**
+- Subscriptions using **Stripe** <https://stripe.com>
+- Validations using **Zod** <https://zod.dev/>
+- Client and server state management with **zustand** <https://zustand-demo.pmnd.rs/>
+- Server and client type safe with **tRpc** and **Prisma** <https://trpc.io/>
 - Written in **TypeScript**
 
 ## Roadmap
@@ -45,6 +46,7 @@ An open source application built using the new router, server components and eve
 - [x] server fetch Adapters / [Prisma](https://prisma.io)
 - [x] client fetch Adapters / [tRPC](https://trpc.io/docs/client/introduction)
 - [x] combine prisma and trpc to get type safe in client side [fullstack type safe](https://www.prisma.io/nextjs)
+- [x] add prisma data proxy [data-proxy]<https://www.prisma.io/data-platform/proxy>
 - [] External services
 
 ## Build basic

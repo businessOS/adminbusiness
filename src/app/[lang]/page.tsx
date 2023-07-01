@@ -1,5 +1,5 @@
-import { getDictionary } from '../../get-dictionary'
-import { Locale } from '../../i18n-config'
+import { getDictionary } from '../../utils/get-dictionary'
+import { Locale } from '../../utils/i18n-config'
 
 
 export default async function IndexPage({

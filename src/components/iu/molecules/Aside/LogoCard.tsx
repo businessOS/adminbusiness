@@ -1,6 +1,6 @@
 import TitleHeading from '../../atoms/TitleHeading'
 import LogoAvatar from './LogoAvatar'
-import { useUserStore } from "@/components/store/userStore"
+import { useUserStore } from "@/interfaces/users/userStore"
 
 
 const LogoCard = () => {

@@ -1,12 +1,13 @@
 import { configureASteps } from './assets/steps'
 import { cn } from "@/lib/utils"
 
-import ConfigureStoreInitializer from '@/components/store/configureStoreInitializer'
-import { useUserStore } from "@/components/store/userStore"
+import { useConfigureStore } from '@/interfaces/configure/configureStore'
+import ConfigureStoreInitializer from '@/interfaces/configure/configureStoreInitializer'
+import { useUserStore } from "@/interfaces/users/userStore"
 
-import { useConfigureStore } from '@/components/store/configureStore'
 import FormComponent from './components/FormComponent'
 import ConfigureMultSteps from './components/ConfigureMultSteps'
+
 
 
 export const metadata = {
@@ -43,6 +44,44 @@ const page = ({ }) => {
       office: '',
       mobile: '',
       fax: '',
+    },
+    company: {
+      id: '',
+      partition: '',
+      groupId: '',
+      ownerId: '',
+      NIF: '',
+      picture: '',
+      imageUrl: '',
+      logoUrl: '',
+      isActive: false,
+      canTransferGoods: false,
+      sharedProducts: false,
+      name: '',
+      descriptions: '',
+      oganization: '',
+      address: {
+        city: '',
+        country: '',
+        dir: '',
+        number: '0',
+        postCode: '',
+        state: '',
+        street: '',
+      },
+      phones: {
+        main: 1,
+        office: '',
+        mobile: '',
+        fax: '',
+      },
+      localitation: {
+        type: '',
+        coord: {
+          lat: 0.00,
+          long: 0.00,
+        }
+      },
     },
     pageNumber: 0,
     pagelength: configureASteps.length,

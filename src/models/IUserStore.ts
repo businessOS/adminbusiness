@@ -1,7 +1,6 @@
 
 type UserId = string
 
-
 interface IUserStore {
     name?: string | null;
     username?: string | null;

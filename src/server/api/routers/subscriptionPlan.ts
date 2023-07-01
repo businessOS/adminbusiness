@@ -1,7 +1,7 @@
 import { z } from "zod";
-import { freePlan, proPlan } from "@/config/subscriptions"
+import { freePlan, proPlan } from "@/utils/config/subscriptions"
 import { createTRPCRouter, protectedProcedure } from "../trpc";
-import { UserSubscriptionPlan } from "@/types/types"
+import { UserSubscriptionPlan } from "@/models/types"
 
 export const subscriptionRouter = createTRPCRouter({
     getUserPlan: protectedProcedure

@@ -4,7 +4,7 @@ import { cn } from '@/lib/utils'
 import { Button } from '@/ui/atoms/Button'
 import { FC, useEffect, useState } from 'react'
 
-import { useConfigureStore } from '@/components/store/configureStore'
+import { useConfigureStore } from '@/interfaces/configure/configureStore'
 import Paragraph from '@/components/iu/atoms/Paragraph'
 
 interface NavButtomsProps {
